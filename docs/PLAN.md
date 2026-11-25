@@ -5,7 +5,7 @@
 - Bitta bosqichni tugatib, ko'rsatib, tasdiq olgach keyingisiga o't.
 - Barcha UI matnlari o'zbek tilida (lotin). Kod, o'zgaruvchi nomlari — inglizcha.
 - Maktab logotipi `apps/web/public/logo.png` da turadi (foydalanuvchi beradi). Logo har sahifada: sidebar tepasida, login sahifada, PDF hisobotlarda.
-- Brend nomi: **ToshbekovSchool**. Ranglar logotipdan olinadi (logo kelguncha placeholder: ko'k `#1E40AF`, oltin `#F59E0B`, to'q matn `#0F172A`).
+- Brend nomi: **ToshbekovSchool**. Ranglar logotipdan olingan va yagona tokens faylida (`apps/web/src/styles/tokens.css`): primary `#03265C`, accent `#7F0B92`, accent-soft `#E0C1E3`, surface-soft `#BBDEFA`.
 - Secretlar (API kalitlar, bot token) faqat env o'zgaruvchilarda. Hech qachon repoga yozilmaydi.
 - Bolalar ma'lumotlari sezgir: har bir so'rovda rol bo'yicha ruxsat tekshiruvi (RBAC) majburiy.
 

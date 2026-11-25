@@ -112,7 +112,7 @@ Men tasdiqlagach qolgan sahifalarni davom ettir.
 
 | Bosqich | Branch | Holat |
 | --- | --- | --- |
-| 0 — Poydevor | `bosqich-0-poydevor` | qabulga tayyor (lokal DB ulangan; deploy kutilmoqda) |
-| 1 — Dizayn tizimi | — | kutilmoqda |
+| 0 — Poydevor | `bosqich-0-poydevor` | qabul qilindi (deploy keyinroq) |
+| 1 — Dizayn tizimi | `bosqich-1-dizayn` | jarayonda (1-qism: Dashboard + sidebar + profil — ko'rib chiqishda) |
 | 2 — DB va API asosi | — | kutilmoqda |
 | 3–13 | — | kutilmoqda |

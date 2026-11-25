@@ -1,0 +1,98 @@
+/*
+ * ToshbekovSchool — brend tokenlari (yagona manba).
+ * Ranglar logodan olingan (apps/web/public/logo.png):
+ *   primary      #03265C  — qalqon foni (to'q ko'k)
+ *   accent       #7F0B92  — "T" ning binafsha qismi
+ *   accent-soft  #E0C1E3  — "T" ning och binafsha qismi
+ *   surface-soft #BBDEFA  — yumshoq fon (och ko'k)
+ * Boshqa joyda rang kodini qattiq yozmang — shu o'zgaruvchilardan foydalaning.
+ */
+
+:root {
+  /* Brend */
+  --brand-primary: #03265c;
+  --brand-accent: #7f0b92;
+  --brand-accent-soft: #e0c1e3;
+  --brand-surface-soft: #bbdefa;
+
+  /* Semantik (light) */
+  --background: #f6f8fc;
+  --foreground: #0b1a33;
+  --card: #ffffff;
+  --card-foreground: #0b1a33;
+  --popover: #ffffff;
+  --popover-foreground: #0b1a33;
+  --primary: var(--brand-primary);
+  --primary-foreground: #ffffff;
+  --secondary: #eef3fb;
+  --secondary-foreground: #03265c;
+  --muted: #eef2f7;
+  --muted-foreground: #4b5a72;
+  --accent: var(--brand-accent);
+  --accent-foreground: #ffffff;
+  --accent-soft: var(--brand-accent-soft);
+  --surface-soft: var(--brand-surface-soft);
+  --success: #12805c;
+  --success-soft: #d6f2e6;
+  --warning: #a15c00;
+  --warning-soft: #fdecc8;
+  --destructive: #c62828;
+  --destructive-soft: #fbdcdc;
+  --border: #dde4ee;
+  --input: #cfd8e5;
+  --ring: #7f0b92;
+
+  /* Sidebar */
+  --sidebar: var(--brand-primary);
+  --sidebar-foreground: #d7e3f6;
+  --sidebar-active: rgba(255, 255, 255, 0.12);
+  --sidebar-active-foreground: #ffffff;
+
+  /* Grafik ranglari */
+  --chart-1: #03265c;
+  --chart-2: #7f0b92;
+  --chart-3: #5b9bd5;
+  --chart-4: #c58fcc;
+
+  /* Shakl */
+  --radius: 0.75rem;
+  --shadow-sm: 0 1px 2px rgba(3, 38, 92, 0.06);
+  --shadow-md: 0 4px 14px rgba(3, 38, 92, 0.08);
+  --shadow-lg: 0 12px 32px rgba(3, 38, 92, 0.12);
+}
+
+.dark {
+  --background: #071226;
+  --foreground: #e8eef8;
+  --card: #0d1d38;
+  --card-foreground: #e8eef8;
+  --popover: #0d1d38;
+  --popover-foreground: #e8eef8;
+  --primary: #7fb3f0;
+  --primary-foreground: #03265c;
+  --secondary: #13284a;
+  --secondary-foreground: #e8eef8;
+  --muted: #13284a;
+  --muted-foreground: #9fb0c8;
+  --accent: #d48fe0;
+  --accent-foreground: #2b0331;
+  --accent-soft: #3b1744;
+  --surface-soft: #12345e;
+  --success: #4cc79a;
+  --success-soft: #0f3a2b;
+  --warning: #f0b44c;
+  --warning-soft: #3d2a08;
+  --destructive: #f07171;
+  --destructive-soft: #3d1414;
+  --border: #1f3557;
+  --input: #2a4470;
+  --ring: #d48fe0;
+  --sidebar: #041a3f;
+  --sidebar-foreground: #b9c9e2;
+  --sidebar-active: rgba(255, 255, 255, 0.1);
+  --sidebar-active-foreground: #ffffff;
+  --chart-1: #7fb3f0;
+  --chart-2: #d48fe0;
+  --chart-3: #5b9bd5;
+  --chart-4: #c58fcc;
+}
