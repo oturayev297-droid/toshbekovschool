@@ -40,7 +40,8 @@
 
 ## Holat
 
-| Bosqich           | Branch               | Holat      |
-| ----------------- | -------------------- | ---------- |
-| 0 — Poydevor      | `bosqich-0-poydevor` | jarayonda  |
-| 1 — Dizayn tizimi | —                    | kutilmoqda |
+| Bosqich             | Branch               | Holat      |
+| ------------------- | -------------------- | ---------- |
+| 0 — Poydevor        | `bosqich-0-poydevor` | jarayonda  |
+| 1 — Dizayn tizimi   | —                    | kutilmoqda |
+| 2 — DB va API asosi | —                    | kutilmoqda |
