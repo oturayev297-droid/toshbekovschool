@@ -32,6 +32,12 @@
 
 **Egasining tekshiruvi:** joylashuv, ranglar, bo'lim tartibi, funksiyalar ro'yxati. O'zgarish bo'lsa shu bosqichda tuzatiladi — keyin qimmatroq.
 
+### 2 — Ma'lumotlar bazasi va API asosi
+
+**Ish:** Prisma sxemasi (`PLAN.md` 4-bo'lim jadvallari), migratsiyalar, seed (30 o'quvchi, 8 o'qituvchi, fanlar), RBAC middleware, Zod validatsiya, xatolar formati. Auth hali yo'q — faqat dev rejimida "rolni almashtirish" tugmasi (productionda o'chiq).
+
+**Qabul:** har endpoint rolga qarab ruxsat tekshiradi (ota-ona boshqa bolani ko'ra olmasligi testlanadi), seed ishlaydi.
+
 ## Holat
 
 | Bosqich           | Branch               | Holat      |
