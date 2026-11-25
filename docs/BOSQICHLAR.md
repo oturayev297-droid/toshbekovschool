@@ -13,12 +13,15 @@
 ## C. Bosqichlar
 
 ### 0 — Poydevor
+
 **Ish:** monorepo, `packages/shared`, ESLint/Prettier, `.env.example`, Prisma ulanish, `/health` endpoint, web'da bo'sh sahifa. Vercel va Railway'ga "salom" deploy.
 
 **Qabul:** web ochiladi, API `/health` → ok, DB ulangan, `CLAUDE.md` yozilgan.
 
 ### 1 — Dizayn tizimi va barcha bo'limlar maketi ← egasi ko'rib chiqadi
+
 **Ish:**
+
 - Logo va brend tokenlari (ranglar logodan), shrift Inter/Manrope, radius, soya, spacing; light tema (+ dark tayyor).
 - Umumiy komponentlar: Sidebar, Topbar, Card, StatCard, DataTable, Badge, Tabs, Modal, Form, EmptyState, Chart, Toast.
 - Direktor shell (sidebar tartibi `PLAN.md` 5-bo'lim) va ota-ona mobil shell (pastki navigatsiya).
@@ -30,7 +33,8 @@
 **Egasining tekshiruvi:** joylashuv, ranglar, bo'lim tartibi, funksiyalar ro'yxati. O'zgarish bo'lsa shu bosqichda tuzatiladi — keyin qimmatroq.
 
 ## Holat
-| Bosqich | Branch | Holat |
-|---|---|---|
-| 0 — Poydevor | `bosqich-0-poydevor` | jarayonda |
-| 1 — Dizayn tizimi | — | kutilmoqda |
+
+| Bosqich           | Branch               | Holat      |
+| ----------------- | -------------------- | ---------- |
+| 0 — Poydevor      | `bosqich-0-poydevor` | jarayonda  |
+| 1 — Dizayn tizimi | —                    | kutilmoqda |
