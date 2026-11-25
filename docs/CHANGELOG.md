@@ -15,3 +15,4 @@ Har bosqich oxirida 3–5 qator qo'shiladi.
 - `.env.example` PLAN 7-bo'limga moslandi (`TELEGRAM_BOT_TOKEN`, `REDIS_URL`, `ANTHROPIC_API_KEY`, `SECRET_KEY`); bot `TELEGRAM_BOT_TOKEN` ni o'qiydi.
 - `CLAUDE.md` to'ldirildi: PLAN 0-bo'lim qoidalari, to'liq stek (Redis/BullMQ, node-cron, Claude API, R2).
 - `docs/PLAN.md` va `docs/BOSQICHLAR.md` egasining yangi versiyalari.
+- Lokal PostgreSQL 17 ga ulandi (`prisma db push`), `/health` → `{"status":"ok","db":"ok"}`.
