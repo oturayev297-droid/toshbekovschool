@@ -65,3 +65,7 @@ Har bosqich oxirida 3–5 qator qo'shiladi.
 
 - Psixolog alohida rol (PLAN.md 2-bo'lim, rollar jadvali): o'quvchilar ro'yxati, IQ, xulq-atvor (AI Markaz) va salomatlik izohlari — faqat ko'rish; moliya va xodimlarni ko'rmaydi.
 - BOSQICHLAR.md: "B2. Har bosqichning umumiy qabul talablari (2-bosqichdan boshlab)" (a–f); 6-bosqich qabul sharti — "belgilangandan 10 soniya ichida".
+
+### Bosqich 1 — qabul qilindi (2026-11-27)
+
+- Egasi 1-bosqichni qabul qildi. Ochiq qolgan maket ishlari BOSQICHLAR.md "1-bosqichdan ochiq qolganlar" bo'limida.

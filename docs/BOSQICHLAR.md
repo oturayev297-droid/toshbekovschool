@@ -119,11 +119,18 @@ Avval faqat Dashboard + sidebar + o'quvchi profili sahifasini qil va skrinshot k
 Men tasdiqlagach qolgan sahifalarni davom ettir.
 ```
 
+## 1-bosqichdan ochiq qolganlar
+Maket bo'yicha, 2-bosqichda tegishli bo'lim qurilganda bajariladi:
+- Yotoqxona xabarlar jurnalida "Bekor qilindi" holati (tarbiyachi bekor qilganda yozuv tushadi).
+- Sozlamalar → "Yotoqxona": smena vaqti, guruhlar va xonalarni tahrirlash (B2-f).
+- AI Markaz "Xulq-atvor" tabida "Direktor va psixolog" belgisi.
+- Savol: smena 07:00 da tugaydi, "Darsga tushish" (08:00) ni kim belgilaydi?
+
 ## Holat
 
 | Bosqich | Branch | Holat |
 | --- | --- | --- |
 | 0 — Poydevor | `bosqich-0-poydevor` | qabul qilindi (deploy keyinroq) |
-| 1 — Dizayn tizimi | `bosqich-1-dizayn` | jarayonda (1-qism, A va B guruh tasdiqlandi; C guruh: AI Markaz, AI Mentor, AI Xodim, Sozlamalar, Ota-ona kabineti — ko'rib chiqishda) |
+| 1 — Dizayn tizimi | `bosqich-1-dizayn` | qabul qilindi (2026-11-27; merge kutilmoqda) |
 | 2 — DB va API asosi | — | kutilmoqda |
 | 3–13 | — | kutilmoqda |
