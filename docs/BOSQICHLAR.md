@@ -60,8 +60,8 @@ toshbekovschool/
 **Qabul:** har endpoint rolga qarab ruxsat tekshiradi (ota-ona boshqa bolani ko'ra olmasligi testlanadi), seed ishlaydi.
 
 ### 3 — O'quvchilar va ota-ona profili
-**Ish:** o'quvchi CRUD, qidiruv/filtr, profil tablari (Umumiy, Fanlar, Moliya, Yotoqxona, Testlar bo'sh holat bilan), ota-onani bog'lash, ota-ona ko'rinishi (faqat o'z farzandi).
-**Qabul:** direktor hamma o'quvchini, ota-ona faqat o'zinikini ko'radi (avtotest).
+**Ish:** o'quvchi CRUD, qidiruv/filtr, profil tablari (Umumiy, Fanlar, Moliya, Yotoqxona, Testlar bo'sh holat bilan), ota-onani bog'lash, ota-ona ko'rinishi (faqat o'z farzandi). **Davomat moduli:** dars bo'yicha davomat (o'qituvchi belgilaydi); 1-dars davomati yotoqxonadagi o'quvchining «darsga tushish» vaqti sifatida avtomatik olinadi.
+**Qabul:** direktor hamma o'quvchini, ota-ona faqat o'zinikini ko'radi (avtotest); 1-dars davomati belgilanganda «darsga tushish» vaqti yotoqxona yozuvida paydo bo'ladi.
 
 ### 4 — Fanlar (2 ta qoidasi) va moliya
 **Ish:** fanlar/yo'nalishlar, `student_subjects` da **aniq 2 ta** cheklovi (DB va API darajasida), narx fan bo'yicha, oylik to'lov rejasi, to'lov kiritish, qarzdorlik hisobi, qarzdorlar ro'yxati.
@@ -73,8 +73,8 @@ toshbekovschool/
 **Ish:** ro'yxatlar, lavozim/fan, oylik belgilash, oylik to'lov tarixi, moliya hisobotiga qo'shilishi.
 
 ### 6 — Telegram bot va yotoqxona
-**Ish:** bot, ota-ona bog'lash (bir martalik kod), tarbiyachi smena jadvali, yotoqxona belgilash (uxlash/turish/darsga tushish/uxladi-uxlamadi), 5 soniyalik "Bekor qilish" oynasidan keyin BullMQ (delayed job) orqali ota-onaga xabar (bekor qilinsa hech narsa yuborilmaydi; jurnalda "5 soniya kutilmoqda" holati), qiz va o'g'il bolalar uchun alohida smena va tarbiyachilar (navbatchi + yordamchi), smena vaqti sozlamadan (`config/school.ts`, keyin Sozlamalar), xabar jurnali, qayta urinish (xato bo'lsa).
-**Qabul:** belgilangandan 10 soniya ichida xabar boradi (5 soniyalik bekor qilish oynasi shu vaqtga kiradi); bekor qilingan belgi uchun xabar ketmaydi va jurnalda "bekor qilindi" holati ko'rinadi; yuborilmasa jurnalda ko'rinadi va qayta uriniladi.
+**Ish:** bot, ota-ona bog'lash (bir martalik kod), tarbiyachi smena jadvali, yotoqxona belgilash: tungi tarbiyachi faqat uxlash/turish vaqti va uxladi-uxlamadi ni belgilaydi, 07:00 da smenani topshiradi; «darsga tushish» vaqti 1-dars davomatidan avtomatik olinadi (davomat bo'lmasa tarbiyachi qo'lda belgilashi mumkin — zaxira); **ertalabgi birlashgan xabar** — ota-onaga bitta xabar (turdi + darsga tushdi), 5 soniyalik "Bekor qilish" oynasidan keyin BullMQ (delayed job) orqali ota-onaga xabar (bekor qilinsa hech narsa yuborilmaydi; jurnalda "5 soniya kutilmoqda" holati), qiz va o'g'il bolalar uchun alohida smena va tarbiyachilar (navbatchi + yordamchi), smena vaqti sozlamadan (`config/school.ts`, keyin Sozlamalar), xabar jurnali, qayta urinish (xato bo'lsa).
+**Qabul:** ertalab ota-onaga turish va darsga tushish uchun bitta birlashgan xabar boradi (ikkita alohida emas); belgilangandan 10 soniya ichida xabar boradi (5 soniyalik bekor qilish oynasi shu vaqtga kiradi); bekor qilingan belgi uchun xabar ketmaydi va jurnalda "bekor qilindi" holati ko'rinadi; yuborilmasa jurnalda ko'rinadi va qayta uriniladi.
 
 ### 7 — Oshxona
 **Ish:** haftalik menyu kiritish (kun × 4 ovqat), arxiv, ota-onalarga yuborish (rejali + qo'lda tugma), ota-ona profilida ko'rinish.
@@ -124,7 +124,7 @@ Maket bo'yicha, 2-bosqichda tegishli bo'lim qurilganda bajariladi:
 - Yotoqxona xabarlar jurnalida "Bekor qilindi" holati (tarbiyachi bekor qilganda yozuv tushadi).
 - Sozlamalar → "Yotoqxona": smena vaqti, guruhlar va xonalarni tahrirlash (B2-f).
 - AI Markaz "Xulq-atvor" tabida "Direktor va psixolog" belgisi.
-- Savol: smena 07:00 da tugaydi, "Darsga tushish" (08:00) ni kim belgilaydi?
+- ~~Savol: «Darsga tushish» ni kim belgilaydi?~~ Hal qilindi: 1-dars davomatidan avtomatik (3-bosqich), zaxira — tarbiyachi qo'lda; ertalab bitta birlashgan xabar (6-bosqich).
 
 ## Holat
 

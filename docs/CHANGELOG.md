@@ -73,3 +73,7 @@ Har bosqich oxirida 3–5 qator qo'shiladi.
 ### Bosqich 1 — dd4a0fc sinovi (2026-11-27)
 
 - Chrome'da sinaldi, konsolda xato yo'q: smena (Uxlamadi → sabab → Bekor qilish → "Bekor qilindi" yozuvi, 1280 va 375 px), Sozlamalar → Yotoqxona (22:00–07:00, 5 soniya, "Xona qo'shish"), AI Markaz → Xulq-atvor va IQ belgisi, ota-ona Hisobot (IQ va "psixometrik" yo'q), rollar jadvalidagi psixolog ustuni.
+
+### Bosqich 1 — darsga tushish qarori (2026-11-27)
+
+- BOSQICHLAR.md: 3-bosqichga davomat moduli (1-dars davomati → «darsga tushish» vaqti avtomatik); 6-bosqichga tungi tarbiyachi vazifalari (uxlash/turish, 07:00 da topshirish, darsga tushish — zaxira sifatida qo'lda) va ertalabgi birlashgan xabar (turdi + darsga tushdi).
