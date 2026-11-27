@@ -198,6 +198,7 @@ const accessCell: Record<Access, { label: string; icon: ReactNode; cls: string }
 
 const roleBadge: Record<string, "brand" | "accent" | "info" | "default" | "warning" | "success"> = {
   direktor: "brand",
+  zavuch: "brand",
   admin: "accent",
   oqituvchi: "info",
   tarbiyachi: "warning",

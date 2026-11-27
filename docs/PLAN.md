@@ -37,13 +37,14 @@ toshbekovschool/
 | Rol | Nima ko'radi |
 |---|---|
 | Direktor / Platforma rahbari | Hamma narsa, hisobotlar, AI Xodim, sozlamalar |
+| Zavuch (o'quv ishlari bo'yicha) | Dars jadvali, davomat nazorati, o'qituvchilar sifati, testlar nazorati, o'quvchilar akademik holati, AI Markaz (IQ'siz). Moliya va oyliklarni ko'rmaydi |
 | Admin / Buxgalter | Moliya, o'quvchi/xodim ro'yxati |
-| O'qituvchi | O'z fani, o'z guruhlari, test, baho |
+| O'qituvchi | O'qituvchi kabineti: guruhlarim, davomat, test yaratish/baholash, natijalar, dars jadvali, o'z oyligim |
 | Tarbiyachi (smena) | Yotoqxona bo'limi |
+| Psixolog | IQ va xulq-atvor tahlili, salomatlik izohlari, o'quvchilar ro'yxati — faqat ko'rish. Moliya va xodimlarni ko'rmaydi |
 | Oshpaz/Menejer | Oshxona menyusi |
 | Ota-ona | Faqat o'z farzandi(lari): hisobot, to'lov, test, menyu |
-| O'quvchi | O'z AI mentorlari, testlar, o'quv rejasi |
-| Psixolog | IQ va xulq-atvor tahlili, salomatlik izohlari, o'quvchilar ro'yxati — faqat ko'rish. Moliya va xodimlarni ko'rmaydi |
+| O'quvchi | O'quvchi kabineti: 2 ta fan, 2 ta AI mentor, testlar, natijalar, o'quv rejasi, dars jadvali, menyu |
 
 ## 3. Bo'limlar (sahifalar xaritasi)
 
@@ -125,8 +126,19 @@ Qoidalar:
 - Ota-ona ulanishi: profildan bir martalik kod → bot orqali bog'lanadi.
 - Xabar yuborish jurnali (kimga, qachon, holat) — ishonchlilik uchun.
 
+### 3.10 Dars jadvali
+- Jadval: sinf × kun × dars (vaqt) × fan × o'qituvchi × xona.
+- Ko'rinishlar: sinf bo'yicha, o'qituvchi bo'yicha, xona bo'yicha. To'qnashuv nazorati: bir o'qituvchi yoki xona bir vaqtda ikki joyda bo'lmaydi.
+- Davomat dars jadvaliga bog'lanadi; 1-dars davomati yotoqxonadagi o'quvchining «darsga tushish» vaqti bo'ladi.
+
+### 3.11 Kabinetlar (rol bo'yicha)
+- **O'qituvchi:** guruhlarim, davomat, test yaratish/baholash, natijalar, dars jadvali, o'z oyligim.
+- **O'quvchi:** 2 ta fan, 2 ta AI mentor, testlar, natijalar, o'quv rejasi, dars jadvali, menyu.
+- **Zavuch:** dars jadvali, davomat nazorati, o'qituvchilar sifati, testlar nazorati, akademik holat, AI Markaz (IQ'siz).
+- **Ota-ona:** 3.2 va 3.9 ga qarang.
+
 ## 4. Ma'lumotlar bazasi (asosiy jadvallar)
-`users`, `roles`, `students`, `parents`, `student_parent`, `teachers`, `staff`, `subjects`, `student_subjects` (aniq 2 ta cheklov), `payments`, `tuition_plans`, `salaries`, `dorm_logs`, `dorm_shifts`, `meal_menus`, `tests`, `questions`, `test_attempts`, `ai_conversations`, `ai_messages`, `ai_reports`, `telegram_links`, `notifications_log`.
+`users`, `roles`, `students`, `classes`, `rooms`, `timetable`, `attendance`, `parents`, `student_parent`, `teachers`, `staff`, `subjects`, `student_subjects` (aniq 2 ta cheklov), `payments`, `tuition_plans`, `salaries`, `dorm_logs`, `dorm_shifts`, `meal_menus`, `tests`, `questions`, `test_attempts`, `ai_conversations`, `ai_messages`, `ai_reports`, `telegram_links`, `notifications_log`.
 
 ## 5. Dizayn yo'nalishi
 - Zamonaviy, toza, maktabga mos: iliq, ishonchli, bolalar uchun keraksiz "o'yinchoqlik"siz.
@@ -143,6 +155,7 @@ Direktor sidebar tartibi:
  Bosh sahifa
  O'quvchilar
  O'qituvchilar
+ Dars jadvali
  Xodimlar
  Moliya
  Yotoqxona

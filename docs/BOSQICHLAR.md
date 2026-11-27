@@ -55,13 +55,17 @@ toshbekovschool/
 **Qabul:** barcha sahifa havolalari ishlaydi, mock ma'lumotli, mobilda buzilmaydi, logo hamma joyda, kontrast yaxshi.
 **Sizning tekshiruvingiz:** joylashuv, ranglar, bo'lim tartibi, funksiyalar ro'yxati. O'zgarish bo'lsa shu bosqichda tuzatiladi — keyin qimmatroq.
 
+### 1b — Kabinetlar maketi (`bosqich-1-dizayn`)
+**Ish:** O'qituvchi, O'quvchi va Zavuch kabinetlari + Dars jadvali sahifasi, mavjud dizayn tilida, mock bilan.
+**Qabul:** 375 va 1280 px skrinshotlar; tugmalar mock (haqiqiy API 2-bosqichdan).
+
 ### 2 — Ma'lumotlar bazasi va API asosi
-**Ish:** Prisma sxemasi (PLAN.md 4-bo'lim jadvallari), migratsiyalar, seed (30 o'quvchi, 8 o'qituvchi, fanlar), RBAC middleware, Zod validatsiya, xatolar formati. Auth hali yo'q — **faqat dev rejimida "rolni almashtirish"** tugmasi (productionda o'chiq).
+**Ish:** Prisma sxemasi (PLAN.md 4-bo'lim jadvallari), migratsiyalar, seed (30 o'quvchi, 8 o'qituvchi, fanlar), RBAC middleware (PLAN 2-bo'limdagi 9 ta rol: direktor, zavuch, admin/buxgalter, o'qituvchi, tarbiyachi, psixolog, oshpaz, ota-ona, o'quvchi), Zod validatsiya, xatolar formati. Auth hali yo'q — **faqat dev rejimida "rolni almashtirish"** tugmasi (productionda o'chiq).
 **Qabul:** har endpoint rolga qarab ruxsat tekshiradi (ota-ona boshqa bolani ko'ra olmasligi testlanadi), seed ishlaydi.
 
 ### 3 — O'quvchilar va ota-ona profili
-**Ish:** o'quvchi CRUD, qidiruv/filtr, profil tablari (Umumiy, Fanlar, Moliya, Yotoqxona, Testlar bo'sh holat bilan), ota-onani bog'lash, ota-ona ko'rinishi (faqat o'z farzandi). **Davomat moduli:** dars bo'yicha davomat (o'qituvchi belgilaydi); 1-dars davomati yotoqxonadagi o'quvchining «darsga tushish» vaqti sifatida avtomatik olinadi.
-**Qabul:** direktor hamma o'quvchini, ota-ona faqat o'zinikini ko'radi (avtotest); 1-dars davomati belgilanganda «darsga tushish» vaqti yotoqxona yozuvida paydo bo'ladi.
+**Ish:** o'quvchi CRUD, qidiruv/filtr, profil tablari (Umumiy, Fanlar, Moliya, Yotoqxona, Testlar bo'sh holat bilan), ota-onani bog'lash, ota-ona ko'rinishi (faqat o'z farzandi). **Dars jadvali moduli** (PLAN 3.10): sinf × kun × dars × fan × o'qituvchi × xona, o'qituvchi/xona to'qnashuvi nazorati. **Davomat moduli:** dars jadvali bo'yicha davomat (o'qituvchi belgilaydi); 1-dars davomati yotoqxonadagi o'quvchining «darsga tushish» vaqti sifatida avtomatik olinadi.
+**Qabul:** direktor hamma o'quvchini, ota-ona faqat o'zinikini ko'radi (avtotest); bir o'qituvchi yoki xonaga bir vaqtda ikkita dars qo'yib bo'lmaydi (avtotest); 1-dars davomati belgilanganda «darsga tushish» vaqti yotoqxona yozuvida paydo bo'ladi.
 
 ### 4 — Fanlar (2 ta qoidasi) va moliya
 **Ish:** fanlar/yo'nalishlar, `student_subjects` da **aniq 2 ta** cheklovi (DB va API darajasida), narx fan bo'yicha, oylik to'lov rejasi, to'lov kiritish, qarzdorlik hisobi, qarzdorlar ro'yxati.
@@ -132,5 +136,6 @@ Maket bo'yicha, 2-bosqichda tegishli bo'lim qurilganda bajariladi:
 | --- | --- | --- |
 | 0 — Poydevor | `bosqich-0-poydevor` | qabul qilindi (deploy keyinroq) |
 | 1 — Dizayn tizimi | `bosqich-1-dizayn` | qabul qilindi (2026-11-27; merge kutilmoqda) |
+| 1b — Kabinetlar maketi | `bosqich-1-dizayn` | ko'rib chiqishda |
 | 2 — DB va API asosi | — | kutilmoqda |
 | 3–13 | — | kutilmoqda |

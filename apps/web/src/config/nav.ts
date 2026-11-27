@@ -1,4 +1,8 @@
 import {
+  Backpack,
+  CalendarDays,
+  ClipboardList,
+  Presentation,
   Banknote,
   Bot,
   BriefcaseBusiness,
@@ -24,6 +28,7 @@ export const directorNav: NavItem[] = [
   { label: t.nav.items.home, href: "/", icon: LayoutDashboard },
   { label: t.nav.items.students, href: "/oquvchilar", icon: GraduationCap },
   { label: t.nav.items.teachers, href: "/oqituvchilar", icon: Users },
+  { label: t.nav.items.schedule, href: "/dars-jadvali", icon: CalendarDays },
   { label: t.nav.items.staff, href: "/xodimlar", icon: BriefcaseBusiness },
   { label: t.nav.items.finance, href: "/moliya", icon: Banknote },
   { label: t.nav.items.dorm, href: "/yotoqxona", icon: Moon },
@@ -40,4 +45,7 @@ export const designNav: NavItem[] = [
   { label: t.nav.items.messageSamples, href: "/xabar-namunalari", icon: MessageSquareText },
   { label: t.nav.items.parentCabinet, href: "/ota-ona", icon: UsersRound },
   { label: t.nav.items.studentMentor, href: "/mentor", icon: MessagesSquare },
+  { label: t.nav.items.teacherCabinet, href: "/oqituvchi", icon: Presentation },
+  { label: t.nav.items.studentCabinet, href: "/oquvchi", icon: Backpack },
+  { label: t.nav.items.zavuchCabinet, href: "/zavuch", icon: ClipboardList },
 ];

@@ -46,10 +46,19 @@ export const telegramSettings = {
 };
 
 export type Role =
-  "direktor" | "admin" | "oqituvchi" | "tarbiyachi" | "psixolog" | "oshpaz" | "otaona" | "oquvchi";
+  | "direktor"
+  | "zavuch"
+  | "admin"
+  | "oqituvchi"
+  | "tarbiyachi"
+  | "psixolog"
+  | "oshpaz"
+  | "otaona"
+  | "oquvchi";
 
 export const roles: { key: Role; label: string }[] = [
   { key: "direktor", label: "Direktor" },
+  { key: "zavuch", label: "Zavuch" },
   { key: "admin", label: "Admin / Buxgalter" },
   { key: "oqituvchi", label: "O'qituvchi" },
   { key: "tarbiyachi", label: "Tarbiyachi" },
@@ -73,6 +82,14 @@ export const users: {
     role: "direktor",
     login: "Login: direktor",
     lastSeen: "Hozir",
+    active: true,
+  },
+  {
+    id: "u11",
+    fullName: "Dilfuza Rahmonova",
+    role: "zavuch",
+    login: "+998 90 377 41 26",
+    lastSeen: "Bugun, 08:15",
     active: true,
   },
   {
@@ -157,6 +174,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     section: "Dashboard va hisobotlar",
     access: {
       direktor: "full",
+      zavuch: "none",
       admin: "none",
       oqituvchi: "none",
       tarbiyachi: "none",
@@ -170,6 +188,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     section: "O'quvchilar ro'yxati",
     access: {
       direktor: "full",
+      zavuch: "view",
       admin: "full",
       oqituvchi: "own",
       tarbiyachi: "own",
@@ -180,9 +199,52 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     },
   },
   {
+    section: "Dars jadvali",
+    access: {
+      direktor: "full",
+      zavuch: "full",
+      admin: "none",
+      oqituvchi: "own",
+      tarbiyachi: "none",
+      psixolog: "none",
+      oshpaz: "none",
+      otaona: "none",
+      oquvchi: "own",
+    },
+  },
+  {
+    section: "Davomat",
+    access: {
+      direktor: "full",
+      zavuch: "full",
+      admin: "none",
+      oqituvchi: "own",
+      tarbiyachi: "none",
+      psixolog: "none",
+      oshpaz: "none",
+      otaona: "none",
+      oquvchi: "none",
+    },
+  },
+  {
+    section: "O'qituvchilar sifati",
+    access: {
+      direktor: "full",
+      zavuch: "full",
+      admin: "none",
+      oqituvchi: "none",
+      tarbiyachi: "none",
+      psixolog: "none",
+      oshpaz: "none",
+      otaona: "none",
+      oquvchi: "none",
+    },
+  },
+  {
     section: "Moliya",
     access: {
       direktor: "full",
+      zavuch: "none",
       admin: "full",
       oqituvchi: "none",
       tarbiyachi: "none",
@@ -196,6 +258,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     section: "Xodimlar va oyliklar",
     access: {
       direktor: "full",
+      zavuch: "none",
       admin: "full",
       oqituvchi: "own",
       tarbiyachi: "own",
@@ -209,6 +272,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     section: "Yotoqxona",
     access: {
       direktor: "full",
+      zavuch: "none",
       admin: "none",
       oqituvchi: "none",
       tarbiyachi: "full",
@@ -222,6 +286,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     section: "IQ (psixometrik baho)",
     access: {
       direktor: "full",
+      zavuch: "none",
       admin: "none",
       oqituvchi: "none",
       tarbiyachi: "none",
@@ -235,6 +300,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     section: "Salomatlik izohlari",
     access: {
       direktor: "full",
+      zavuch: "none",
       admin: "none",
       oqituvchi: "none",
       tarbiyachi: "full",
@@ -248,6 +314,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     section: "Oshxona menyusi",
     access: {
       direktor: "full",
+      zavuch: "none",
       admin: "full",
       oqituvchi: "none",
       tarbiyachi: "none",
@@ -261,6 +328,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     section: "Testlar",
     access: {
       direktor: "full",
+      zavuch: "full",
       admin: "none",
       oqituvchi: "own",
       tarbiyachi: "none",
@@ -275,6 +343,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     section: "AI Markaz",
     access: {
       direktor: "full",
+      zavuch: "view",
       admin: "none",
       oqituvchi: "own",
       tarbiyachi: "none",
@@ -288,6 +357,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     section: "AI mentorlar",
     access: {
       direktor: "full",
+      zavuch: "view",
       admin: "none",
       oqituvchi: "own",
       tarbiyachi: "none",
@@ -301,6 +371,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     section: "Sozlamalar",
     access: {
       direktor: "full",
+      zavuch: "none",
       admin: "none",
       oqituvchi: "none",
       tarbiyachi: "none",

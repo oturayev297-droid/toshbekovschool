@@ -34,7 +34,7 @@ export const teachers: Teacher[] = [
     id: "t-02",
     fullName: "Otabek Qodirov",
     subject: "IT",
-    groups: ["8-A", "10-A", "11-A"],
+    groups: ["8-A", "9-A", "10-A", "11-A"],
     studentsCount: 36,
     hoursPerWeek: 22,
     salary: 9_000_000,

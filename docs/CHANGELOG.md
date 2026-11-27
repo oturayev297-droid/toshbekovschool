@@ -81,3 +81,10 @@ Har bosqich oxirida 3–5 qator qo'shiladi.
 ### Bosqich 1 — qabul qilindi (2026-11-27)
 
 - Egasi barcha tuzatishlardan keyin 1-bosqichni qabul qildi. `main` ga merge egasining "merge qil" buyrug'i bilan, avval zaxira tag olinadi.
+
+## Bosqich 1b — Kabinetlar maketi (2026-11-27)
+
+- PLAN.md: 9 ta rol (zavuch qo'shildi), O'qituvchi/O'quvchi/Zavuch kabinetlari (3.11), Dars jadvali moduli (3.10), sidebar tartibiga "Dars jadvali"; BOSQICHLAR.md: 1b bo'limi, 3-bosqichga Dars jadvali + davomat, 2-bosqichga 9 ta rol.
+- Dars jadvali (`/dars-jadvali`): sinf / o'qituvchi / xona bo'yicha, kun × dars, bugungi kun belgisi; mock o'qituvchilar guruhlaridan to'qnashuvsiz hisoblanadi.
+- Kabinetlar (mobil-birinchi, pastki navigatsiya): O'qituvchi (`/oqituvchi`: bugungi darslar, guruhlar, davomat belgilash, test yaratish/baholash, jadval, oylik), O'quvchi (`/oquvchi`: 2 fan va mentor, testlar/natijalar, reja, jadval, menyu), Zavuch (`/zavuch`: jadval, davomat nazorati, o'qituvchilar sifati, akademik holat, testlar nazorati, AI Markaz IQ va xulq-atvorsiz).
+- Rollar jadvaliga zavuch ustuni va "Dars jadvali", "Davomat", "O'qituvchilar sifati" qatorlari.
