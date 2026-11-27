@@ -31,6 +31,14 @@ toshbekovschool/
 6. Har bosqich oxirida `docs/CHANGELOG.md` ga 3–5 qator yoziladi.
 7. Sezgir ma'lumot (bolalar, to'lovlar): hech qachon konsolga/logga chiqarilmaydi; secretlar faqat env'da.
 
+## B2. Har bosqichning umumiy qabul talablari (2-bosqichdan boshlab)
+1. O'sha bosqich bo'limlarida mock ma'lumot qolmaydi: har tugma, forma va filtr haqiqiy API so'rovi bilan ishlaydi.
+2. Har so'rovda yuklanish, xato va bo'sh holat ko'rinadi; xato bo'lsa tushunarli o'zbekcha xabar (toast), sahifa qulamaydi.
+3. API'da Zod validatsiya va rol tekshiruvi; har endpoint uchun kamida bitta avtotest (ruxsat va xato holatlari bilan).
+4. Chrome'da har bir tugma bosib sinaladi va natija ro'yxati ko'rsatiladi (konsolda xato yo'q).
+5. Namunaviy ma'lumot alohida seed skriptda (`pnpm seed:sample`) bo'ladi va tozalanadi (`pnpm seed:reset`), shunda haqiqiy ma'lumotga o'tish oson bo'lsin.
+6. Sinflar, fan narxlari, yotoqxona xonalari kodga qotirilmaydi: Sozlamalar sahifasidan tahrirlanadi.
+
 ## C. Bosqichlar
 
 ### 0 — Poydevor
@@ -47,24 +55,30 @@ toshbekovschool/
 **Qabul:** barcha sahifa havolalari ishlaydi, mock ma'lumotli, mobilda buzilmaydi, logo hamma joyda, kontrast yaxshi.
 **Sizning tekshiruvingiz:** joylashuv, ranglar, bo'lim tartibi, funksiyalar ro'yxati. O'zgarish bo'lsa shu bosqichda tuzatiladi — keyin qimmatroq.
 
+### 1b — Kabinetlar maketi (`bosqich-1-dizayn`)
+**Ish:** O'qituvchi, O'quvchi va Zavuch kabinetlari + Dars jadvali sahifasi, mavjud dizayn tilida, mock bilan.
+**Qabul:** 375 va 1280 px skrinshotlar; tugmalar mock (haqiqiy API 2-bosqichdan).
+
 ### 2 — Ma'lumotlar bazasi va API asosi
-**Ish:** Prisma sxemasi (PLAN.md 4-bo'lim jadvallari), migratsiyalar, seed (30 o'quvchi, 8 o'qituvchi, fanlar), RBAC middleware, Zod validatsiya, xatolar formati. Auth hali yo'q — **faqat dev rejimida "rolni almashtirish"** tugmasi (productionda o'chiq).
+**Ish:** Prisma sxemasi (PLAN.md 4-bo'lim jadvallari), migratsiyalar, seed (30 o'quvchi, 8 o'qituvchi, fanlar), RBAC middleware (PLAN 2-bo'limdagi 9 ta rol: direktor, zavuch, admin/buxgalter, o'qituvchi, tarbiyachi, psixolog, oshpaz, ota-ona, o'quvchi), Zod validatsiya, xatolar formati. Auth hali yo'q — **faqat dev rejimida "rolni almashtirish"** tugmasi (productionda o'chiq).
 **Qabul:** har endpoint rolga qarab ruxsat tekshiradi (ota-ona boshqa bolani ko'ra olmasligi testlanadi), seed ishlaydi.
 
 ### 3 — O'quvchilar va ota-ona profili
-**Ish:** o'quvchi CRUD, qidiruv/filtr, profil tablari (Umumiy, Fanlar, Moliya, Yotoqxona, Testlar bo'sh holat bilan), ota-onani bog'lash, ota-ona ko'rinishi (faqat o'z farzandi).
-**Qabul:** direktor hamma o'quvchini, ota-ona faqat o'zinikini ko'radi (avtotest).
+**Ish:** o'quvchi CRUD, qidiruv/filtr, profil tablari (Umumiy, Fanlar, Moliya, Yotoqxona, Testlar bo'sh holat bilan), ota-onani bog'lash, ota-ona ko'rinishi (faqat o'z farzandi). **Dars jadvali moduli** (PLAN 3.10): sinf × kun × dars × fan × o'qituvchi × xona, o'qituvchi/xona to'qnashuvi nazorati. **Davomat moduli:** dars jadvali bo'yicha davomat (o'qituvchi belgilaydi); 1-dars davomati yotoqxonadagi o'quvchining «darsga tushish» vaqti sifatida avtomatik olinadi.
+**Qabul:** direktor hamma o'quvchini, ota-ona faqat o'zinikini ko'radi (avtotest); bir o'qituvchi yoki xonaga bir vaqtda ikkita dars qo'yib bo'lmaydi (avtotest); 1-dars davomati belgilanganda «darsga tushish» vaqti yotoqxona yozuvida paydo bo'ladi.
 
 ### 4 — Fanlar (2 ta qoidasi) va moliya
 **Ish:** fanlar/yo'nalishlar, `student_subjects` da **aniq 2 ta** cheklovi (DB va API darajasida), narx fan bo'yicha, oylik to'lov rejasi, to'lov kiritish, qarzdorlik hisobi, qarzdorlar ro'yxati.
 **Qabul:** 3-fan qo'shib bo'lmaydi; qarz to'g'ri hisoblanadi (misol hisoblar bilan test).
+**Qoida:** oylik to'lov = tanlangan 2 ta fan narxlari yig'indisi.
+**Keyinroq:** oila (aka-uka / opa-singil) chegirmasi — hozircha qo'shilmaydi.
 
 ### 5 — O'qituvchilar, xodimlar, oyliklar
 **Ish:** ro'yxatlar, lavozim/fan, oylik belgilash, oylik to'lov tarixi, moliya hisobotiga qo'shilishi.
 
 ### 6 — Telegram bot va yotoqxona
-**Ish:** bot, ota-ona bog'lash (bir martalik kod), tarbiyachi smena jadvali, yotoqxona belgilash (uxlash/turish/darsga tushish/uxladi-uxlamadi), BullMQ orqali **darhol** ota-onaga xabar, xabar jurnali, qayta urinish (xato bo'lsa).
-**Qabul:** belgilangandan 5 soniya ichida xabar boradi; yuborilmasa jurnalda ko'rinadi va qayta uriniladi.
+**Ish:** bot, ota-ona bog'lash (bir martalik kod), tarbiyachi smena jadvali, yotoqxona belgilash: tungi tarbiyachi faqat uxlash/turish vaqti va uxladi-uxlamadi ni belgilaydi, 07:00 da smenani topshiradi; «darsga tushish» vaqti 1-dars davomatidan avtomatik olinadi (davomat bo'lmasa tarbiyachi qo'lda belgilashi mumkin — zaxira); **ertalabgi birlashgan xabar** — ota-onaga bitta xabar (turdi + darsga tushdi), 5 soniyalik "Bekor qilish" oynasidan keyin BullMQ (delayed job) orqali ota-onaga xabar (bekor qilinsa hech narsa yuborilmaydi; jurnalda "5 soniya kutilmoqda" holati), qiz va o'g'il bolalar uchun alohida smena va tarbiyachilar (navbatchi + yordamchi), smena vaqti sozlamadan (`config/school.ts`, keyin Sozlamalar), xabar jurnali, qayta urinish (xato bo'lsa).
+**Qabul:** ertalab ota-onaga turish va darsga tushish uchun bitta birlashgan xabar boradi (ikkita alohida emas); belgilangandan 10 soniya ichida xabar boradi (5 soniyalik bekor qilish oynasi shu vaqtga kiradi); bekor qilingan belgi uchun xabar ketmaydi va jurnalda "bekor qilindi" holati ko'rinadi; yuborilmasa jurnalda ko'rinadi va qayta uriniladi.
 
 ### 7 — Oshxona
 **Ish:** haftalik menyu kiritish (kun × 4 ovqat), arxiv, ota-onalarga yuborish (rejali + qo'lda tugma), ota-ona profilida ko'rinish.
@@ -87,6 +101,7 @@ toshbekovschool/
 
 ### 13 — Mustahkamlash va ishga tushirish
 **Ish:** to'liq rol testlari, yuklama sinovi, zaxira (DB backup), xatolar monitoringi, domen, staging → production, 404/500 sahifalar.
+**Tozalash:** "Maket" guruhini (sidebar: Xabar namunalari, Ota-ona kabineti, AI Mentor havolalari; "Direktor paneli" qaytish havolalari) va mock ma'lumotlarni (`apps/web/src/mock`, "Maket" belgilari) production'dan olib tashlash.
 **Yakun:** barcha bo'limlar qanday ishlashi haqida PDF qo'llanma.
 
 ## D. Claude Code'ga birinchi buyruq (0-bosqich)
@@ -108,11 +123,19 @@ Avval faqat Dashboard + sidebar + o'quvchi profili sahifasini qil va skrinshot k
 Men tasdiqlagach qolgan sahifalarni davom ettir.
 ```
 
+## 1-bosqichdan ochiq qolganlar
+Maket bo'yicha, 2-bosqichda tegishli bo'lim qurilganda bajariladi:
+- Yotoqxona xabarlar jurnalida "Bekor qilindi" holati (tarbiyachi bekor qilganda yozuv tushadi).
+- Sozlamalar → "Yotoqxona": smena vaqti, guruhlar va xonalarni tahrirlash (B2-f).
+- AI Markaz "Xulq-atvor" tabida "Direktor va psixolog" belgisi.
+- ~~Savol: «Darsga tushish» ni kim belgilaydi?~~ Hal qilindi: 1-dars davomatidan avtomatik (3-bosqich), zaxira — tarbiyachi qo'lda; ertalab bitta birlashgan xabar (6-bosqich).
+
 ## Holat
 
 | Bosqich | Branch | Holat |
 | --- | --- | --- |
-| 0 — Poydevor | `bosqich-0-poydevor` | qabulga tayyor (lokal DB ulangan; deploy kutilmoqda) |
-| 1 — Dizayn tizimi | — | kutilmoqda |
+| 0 — Poydevor | `bosqich-0-poydevor` | qabul qilindi (deploy keyinroq) |
+| 1 — Dizayn tizimi | `bosqich-1-dizayn` | qabul qilindi (2026-11-27; merge kutilmoqda) |
+| 1b — Kabinetlar maketi | `bosqich-1-dizayn` | qabul qilindi (2026-11-27) |
 | 2 — DB va API asosi | — | kutilmoqda |
 | 3–13 | — | kutilmoqda |

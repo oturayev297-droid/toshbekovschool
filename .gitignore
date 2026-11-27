@@ -6,3 +6,6 @@ dist/
 !.env.example
 *.log
 *.tsbuildinfo
+
+# Boshqa AI vositasi (Codex CLI) yaratgan CLAUDE.md nusxasi — qoidalar faqat CLAUDE.md da
+AGENTS.md
