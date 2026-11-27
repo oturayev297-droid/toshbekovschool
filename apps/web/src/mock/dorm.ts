@@ -129,7 +129,8 @@ export type ProblemLevel = AlertLevel;
 export const reasonLabel = (r?: NotSleptReason) => (r ? t.dorm.reasons[r] : "Sabab ko'rsatilmagan");
 
 /** kutilmoqda — 5 soniyalik bekor qilish oynasi ichida (hali yuborilmagan) */
-export type DeliveryStatus = "kutilmoqda" | "yetkazildi" | "navbatda" | "xato";
+/** bekor — tarbiyachi oyna ichida bekor qildi, hech narsa yuborilmadi (jurnalda iz qoladi) */
+export type DeliveryStatus = "kutilmoqda" | "yetkazildi" | "navbatda" | "xato" | "bekor";
 
 const deliveries: { status: DeliveryStatus; attempts: number }[] = [
   { status: "yetkazildi", attempts: 1 },
@@ -151,7 +152,22 @@ export const dormMessageLog = dormStudents
   .sort((a, b) => nightOrder(b.time).localeCompare(nightOrder(a.time)))
   .slice(0, 8)
   // Eng yangi belgi hozirgina bosilgan: bekor qilish oynasi ichida, hali yuborilmagan
-  .map((m, i) => (i === 0 ? { ...m, status: "kutilmoqda" as const, attempts: 0 } : m));
+  .map((m, i) => (i === 0 ? { ...m, status: "kutilmoqda" as DeliveryStatus, attempts: 0 } : m))
+  .flatMap((m, i) =>
+    // Namuna: tarbiyachi avval xato "Uxlamadi" bosib, oyna ichida bekor qilgan, keyin "Uxladi" belgilagan
+    i === 2 && m.event === t.dorm.markSlept
+      ? [
+          m,
+          {
+            ...m,
+            id: `c-${m.id}`,
+            event: t.dorm.markNotSlept,
+            status: "bekor" as DeliveryStatus,
+            attempts: 0,
+          },
+        ]
+      : [m],
+  );
 
 // Bekor qilish oynasidagi belgi hali yuborilmagan — ro'yxatda ham xabar vaqti yo'q
 for (const m of dormMessageLog) {

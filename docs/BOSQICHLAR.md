@@ -32,12 +32,12 @@ toshbekovschool/
 7. Sezgir ma'lumot (bolalar, to'lovlar): hech qachon konsolga/logga chiqarilmaydi; secretlar faqat env'da.
 
 ## B2. Har bosqichning umumiy qabul talablari (2-bosqichdan boshlab)
-a) O'sha bosqich bo'limlarida mock qolmaydi: har tugma, forma va filtr haqiqiy API so'rovi bilan ishlaydi.
-b) Har so'rovda yuklanish, xato va bo'sh holat ko'rinadi; xatoda tushunarli o'zbekcha xabar, sahifa qulamaydi.
-c) API'da Zod validatsiya va rol tekshiruvi; har endpoint uchun kamida bitta avtotest.
-d) Chrome'da har bir tugma bosib sinaladi, natija ro'yxati ko'rsatiladi (konsolda xato yo'q).
-e) Namunaviy ma'lumot alohida (`pnpm seed:sample`, `pnpm seed:reset`).
-f) Sinflar, fan narxlari, yotoqxona xonalari Sozlamalardan tahrirlanadi, kodga qotirilmaydi.
+1. O'sha bosqich bo'limlarida mock ma'lumot qolmaydi: har tugma, forma va filtr haqiqiy API so'rovi bilan ishlaydi.
+2. Har so'rovda yuklanish, xato va bo'sh holat ko'rinadi; xato bo'lsa tushunarli o'zbekcha xabar (toast), sahifa qulamaydi.
+3. API'da Zod validatsiya va rol tekshiruvi; har endpoint uchun kamida bitta avtotest (ruxsat va xato holatlari bilan).
+4. Chrome'da har bir tugma bosib sinaladi va natija ro'yxati ko'rsatiladi (konsolda xato yo'q).
+5. Namunaviy ma'lumot alohida seed skriptda (`pnpm seed:sample`) bo'ladi va tozalanadi (`pnpm seed:reset`), shunda haqiqiy ma'lumotga o'tish oson bo'lsin.
+6. Sinflar, fan narxlari, yotoqxona xonalari kodga qotirilmaydi: Sozlamalar sahifasidan tahrirlanadi.
 
 ## C. Bosqichlar
 
@@ -131,6 +131,6 @@ Maket bo'yicha, 2-bosqichda tegishli bo'lim qurilganda bajariladi:
 | Bosqich | Branch | Holat |
 | --- | --- | --- |
 | 0 — Poydevor | `bosqich-0-poydevor` | qabul qilindi (deploy keyinroq) |
-| 1 — Dizayn tizimi | `bosqich-1-dizayn` | qabul qilindi (2026-11-27; merge kutilmoqda) |
+| 1 — Dizayn tizimi | `bosqich-1-dizayn` | tuzatishlar (smena, bekor qilish, IQ) — qabul kutilmoqda |
 | 2 — DB va API asosi | — | kutilmoqda |
 | 3–13 | — | kutilmoqda |

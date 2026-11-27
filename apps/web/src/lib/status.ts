@@ -36,7 +36,7 @@ export const alertBadge: Record<
 /** Telegram xabari yetkazilish holati */
 export const deliveryBadge: Record<
   DeliveryStatus,
-  { label: string; variant: "info" | "success" | "warning" | "danger" }
+  { label: string; variant: "info" | "success" | "warning" | "danger" | "default" }
 > = {
   kutilmoqda: {
     label: t.status.delivery.kutilmoqda(schoolConfig.dorm.undoSeconds),
@@ -45,4 +45,5 @@ export const deliveryBadge: Record<
   yetkazildi: { label: t.status.delivery.yetkazildi, variant: "success" },
   navbatda: { label: t.status.delivery.navbatda, variant: "warning" },
   xato: { label: t.status.delivery.xato, variant: "danger" },
+  bekor: { label: t.status.delivery.bekor, variant: "default" },
 };

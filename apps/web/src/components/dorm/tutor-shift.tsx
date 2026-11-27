@@ -32,6 +32,8 @@ export function TutorShift({ initial }: { initial: DormStudent[] }) {
   const [filter, setFilter] = useState<Filter>("all");
   const [pending, setPending] = useState<Record<string, Pending>>({});
   const [now, setNow] = useState(() => Date.now());
+  /** Bekor qilingan belgilar: id → vaqt (jurnaldagi "Bekor qilindi" holati) */
+  const [cancelled, setCancelled] = useState<Record<string, string>>({});
 
   const hasPending = Object.keys(pending).length > 0;
 
@@ -78,6 +80,11 @@ export function TutorShift({ initial }: { initial: DormStudent[] }) {
   // Vaqt avtomatik "hozir" (keyin tahrirlanadi). Uxladi → uxlash vaqti; Uxlamadi → tekshirilgan vaqt.
   const mark = (r: DormStudent, status: "uxladi" | "uxlamadi") => {
     const time = tashkentTime(new Date());
+    setCancelled((c) => {
+      const next = { ...c };
+      delete next[r.id];
+      return next;
+    });
     setPending((ps) => ({
       ...ps,
       // Oyna ichida qayta bosilsa — sanoq yangilanadi, asl (bosishdan oldingi) holat saqlanadi
@@ -103,6 +110,7 @@ export function TutorShift({ initial }: { initial: DormStudent[] }) {
     const p = pending[id];
     if (!p) return;
     setRows((rs) => rs.map((r) => (r.id === id ? p.prev : r)));
+    setCancelled((c) => ({ ...c, [id]: tashkentTime(new Date()) }));
     setPending((ps) => {
       const next = { ...ps };
       delete next[id];
@@ -349,6 +357,12 @@ export function TutorShift({ initial }: { initial: DormStudent[] }) {
                   ))}
                 </div>
 
+                {!p && cancelled[r.id] && (
+                  <p className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <Undo2 className="size-3.5" aria-hidden />
+                    {t.dorm.cancelled(cancelled[r.id])}
+                  </p>
+                )}
                 {!p && (
                   <p
                     className={cn(

@@ -75,7 +75,9 @@ const logColumns: Column<LogRow>[] = [
 export default function DormDirectorPage() {
   const s = t.dorm.stats;
   const sleptPct = Math.round((dormToday.slept / dormToday.total) * 100);
-  const notDone = dormMessageLog.filter((m) => m.status !== "yetkazildi").length;
+  const notDone = dormMessageLog.filter((m) =>
+    ["kutilmoqda", "navbatda", "xato"].includes(m.status),
+  ).length;
 
   return (
     <>

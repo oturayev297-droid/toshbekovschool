@@ -1,5 +1,11 @@
 import { PageHeader } from "@/components/layout/page-header";
-import { SubjectsPanel, TelegramPanel, UsersPanel } from "@/components/settings/settings-panels";
+import {
+  DormPanel,
+  SubjectsPanel,
+  TelegramPanel,
+  UsersPanel,
+} from "@/components/settings/settings-panels";
+import { t } from "@/i18n";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -10,17 +16,21 @@ export default function SettingsPage() {
     <>
       <PageHeader
         title="Sozlamalar"
-        description="Yo'nalishlar va narxlar, Telegram, foydalanuvchilar va rollar"
+        description="Yo'nalishlar va narxlar, yotoqxona, Telegram, foydalanuvchilar va rollar"
         actions={<Button>O&apos;zgarishlarni saqlash</Button>}
       />
       <Tabs defaultValue="fanlar">
         <TabsList aria-label="Sozlamalar bo'limlari">
           <TabsTrigger value="fanlar">Yo&apos;nalishlar va narxlar</TabsTrigger>
+          <TabsTrigger value="yotoqxona">{t.settings.dormTab}</TabsTrigger>
           <TabsTrigger value="telegram">Telegram</TabsTrigger>
           <TabsTrigger value="foydalanuvchilar">Foydalanuvchilar va rollar</TabsTrigger>
         </TabsList>
         <TabsContent value="fanlar">
           <SubjectsPanel />
+        </TabsContent>
+        <TabsContent value="yotoqxona">
+          <DormPanel />
         </TabsContent>
         <TabsContent value="telegram">
           <TelegramPanel />

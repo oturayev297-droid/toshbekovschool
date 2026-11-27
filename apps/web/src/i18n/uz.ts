@@ -48,6 +48,7 @@ export const uz = {
       yetkazildi: "Yetkazildi",
       navbatda: "Qayta urinilmoqda",
       xato: "Yetkazilmadi",
+      bekor: "Bekor qilindi",
     },
   },
 
@@ -101,6 +102,7 @@ export const uz = {
     reasonNotePlaceholder: "Qisqa izoh (ota-onaga ketmaydi)",
     undoPending: (s: number) => `Xabar ${s} soniyadan keyin ketadi`,
     undo: "Bekor qilish",
+    cancelled: (time: string) => `Bekor qilindi · ${time} — xabar yuborilmadi`,
     notified: (time: string, neutral: boolean) =>
       `Ota-onaga ${neutral ? "neytral " : ""}xabar yuborildi · ${time}`,
     willNotify: (s: number) =>
@@ -132,6 +134,22 @@ export const uz = {
     schedule: "Smena jadvali",
     scheduleHint: (range: string, hours: string) => `${range} · har kecha ${hours}`,
     currentShift: "joriy smena",
+  },
+
+  settings: {
+    dormTab: "Yotoqxona",
+    shiftTitle: "Tungi smena vaqti",
+    shiftHint: "Tarbiyachi ilovasi, smena jadvali va xabarlar shu vaqtga tayanadi",
+    shiftStart: "Boshlanishi",
+    shiftEnd: "Tugashi",
+    undoTitle: "Bekor qilish oynasi",
+    undoHint: (s: number) =>
+      `«Uxladi/Uxlamadi» bosilgach ${s} soniya kutiladi, keyin ota-onaga xabar ketadi`,
+    groupsTitle: "Guruhlar va xonalar",
+    groupsHint: "Qizlar va o'g'il bolalar alohida qavat va smenada",
+    rooms: (n: number) => `${n} ta xona`,
+    addRoom: "Xona qo'shish",
+    note: "Maket: o'zgarishlar 2-bosqichdan keyin DB'ga saqlanadi (hozir config/school.ts dagi qiymatlar)",
   },
 
   parent: {

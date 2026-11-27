@@ -8,7 +8,10 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
 import { formatSom } from "@/lib/format";
+import { schoolConfig } from "@/config/school";
+import { t } from "@/i18n";
 import { cn } from "@/lib/utils";
+import { dormStudents } from "@/mock/dorm";
 import {
   type Access,
   permissions,
@@ -321,6 +324,97 @@ export function UsersPanel() {
           </div>
         </CardContent>
       </Card>
+    </div>
+  );
+}
+
+/** Yotoqxona: smena vaqti, bekor qilish oynasi, guruhlar va xonalar (kodga qotirilmaydi) */
+export function DormPanel() {
+  const [start, setStart] = useState<string>(schoolConfig.dorm.shiftStart);
+  const [end, setEnd] = useState<string>(schoolConfig.dorm.shiftEnd);
+  const [rooms, setRooms] = useState(() =>
+    Object.fromEntries(
+      schoolConfig.dorm.groups.map(({ key }) => [
+        key,
+        [...new Set(dormStudents.filter((d) => d.group === key).map((d) => d.room))].sort(),
+      ]),
+    ),
+  );
+  const addRoom = (key: string, floor: number) =>
+    setRooms((r) => {
+      const list = r[key];
+      const last = list.length ? Number(list[list.length - 1]) : floor * 100;
+      return { ...r, [key]: [...list, String(last + 1)] };
+    });
+
+  return (
+    <div className="space-y-6">
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Card className="p-4 sm:p-5">
+          <p className="font-semibold">{t.settings.shiftTitle}</p>
+          <p className="text-sm text-muted-foreground">{t.settings.shiftHint}</p>
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            <label className="text-xs font-semibold text-muted-foreground">
+              {t.settings.shiftStart}
+              <Input
+                type="time"
+                value={start}
+                onChange={(e) => setStart(e.target.value)}
+                className="mt-1 tabular-nums"
+              />
+            </label>
+            <label className="text-xs font-semibold text-muted-foreground">
+              {t.settings.shiftEnd}
+              <Input
+                type="time"
+                value={end}
+                onChange={(e) => setEnd(e.target.value)}
+                className="mt-1 tabular-nums"
+              />
+            </label>
+          </div>
+        </Card>
+        <Card className="p-4 sm:p-5">
+          <p className="font-semibold">{t.settings.undoTitle}</p>
+          <p className="text-sm text-muted-foreground">
+            {t.settings.undoHint(schoolConfig.dorm.undoSeconds)}
+          </p>
+          <p className="mt-4 text-2xl font-bold tabular-nums">
+            {t.common.seconds(schoolConfig.dorm.undoSeconds)}
+          </p>
+        </Card>
+      </div>
+
+      <Card>
+        <CardHeader title={t.settings.groupsTitle} description={t.settings.groupsHint} />
+        <CardContent className="px-0 pb-2">
+          <ul className="divide-y">
+            {schoolConfig.dorm.groups.map(({ key, floor }) => (
+              <li key={key} className="px-5 py-3">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="font-semibold">
+                    {t.dorm.groups[key]}{" "}
+                    <span className="text-xs font-normal text-muted-foreground">
+                      · {t.dorm.floor(floor)} · {t.settings.rooms(rooms[key].length)}
+                    </span>
+                  </p>
+                  <Button variant="outline" size="sm" onClick={() => addRoom(key, floor)}>
+                    <Plus /> {t.settings.addRoom}
+                  </Button>
+                </div>
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {rooms[key].map((r) => (
+                    <Badge key={r} variant="info">
+                      {t.dorm.room(r)}
+                    </Badge>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </CardContent>
+      </Card>
+      <p className="text-xs text-muted-foreground">{t.settings.note}</p>
     </div>
   );
 }

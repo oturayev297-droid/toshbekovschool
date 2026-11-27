@@ -274,6 +274,12 @@ export function AiCenter({ students }: { students: Student[] }) {
             <CardHeader
               title="Xulq-atvor tahlili"
               description="Yotoqxona, davomat, test va mentor faolligi ma'lumotlaridan · oxirgi 7 kun"
+              action={
+                <PrivateBadge
+                  label={t.privacy.directorPsychologist}
+                  className="whitespace-normal"
+                />
+              }
             />
             <CardContent>
               <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">
