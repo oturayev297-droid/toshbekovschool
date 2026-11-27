@@ -29,6 +29,7 @@ import type { DormStatus } from "@/mock/data";
 import { currentWeek, meals } from "@/mock/kitchen";
 import { scoreLevel } from "@/mock/tests";
 import { subjectSettings } from "@/mock/settings";
+import { t } from "@/i18n";
 import { useChild } from "./parent-shell";
 
 /** Ota-onaga yotoqxona holati — faqat neytral matn, salomatlik tafsilotlarisiz */
@@ -104,11 +105,11 @@ export function ParentHome() {
         </p>
         <p className="mt-2 line-clamp-3 text-sm leading-relaxed">{c.weekly.summary}</p>
         <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Brain className="size-3.5 text-accent" aria-hidden /> O&apos;rganish uslubi:{" "}
+          <Brain className="size-3.5 text-accent" aria-hidden /> {t.parent.learningStyle}:{" "}
           <span className="font-semibold text-foreground">{c.insight.learningStyle.style}</span>
         </p>
         <Button variant="outline" size="sm" className="mt-3" asChild>
-          <Link href="/ota-ona/hisobot">Hisobot va tavsiyalar</Link>
+          <Link href="/ota-ona/hisobot">{t.parent.reportAndTips}</Link>
         </Button>
       </Card>
 
@@ -205,10 +206,7 @@ export function ParentReport() {
         </CardContent>
       </Card>
       <Card>
-        <CardHeader
-          title="O'rganish uslubi"
-          description="AI kuzatuvi asosida (testlar, mentor suhbatlari) · taxminiy, vaqt o'tishi bilan o'zgarishi mumkin"
-        />
+        <CardHeader title={t.parent.learningStyle} description={t.parent.learningStyleHint} />
         <CardContent>
           <p className="flex items-center gap-2 font-semibold text-primary">
             <Brain className="size-4 text-accent" aria-hidden /> {c.insight.learningStyle.style}
@@ -225,10 +223,7 @@ export function ParentReport() {
         </CardContent>
       </Card>
       <Card className="border-accent/30 bg-accent-soft/15">
-        <CardHeader
-          title="Uyda qanday yordam berish mumkin"
-          description="Ota-ona uchun tavsiyalar"
-        />
+        <CardHeader title={t.parent.tips} description={t.parent.tipsHint} />
         <CardContent>
           <ol className="space-y-3">
             {c.insight.tips.map((x, i) => (

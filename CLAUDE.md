@@ -25,6 +25,8 @@ Monorepo (pnpm workspaces):
 
 - Bitta bosqichni tugatib, ko'rsatib, tasdiq olgach keyingisiga o'tiladi.
 - Barcha UI matnlari o'zbek tilida (lotin). Kod va o'zgaruvchi nomlari — inglizcha.
+- UI matnlari bitta joyda: `apps/web/src/i18n/uz.ts` (`t` orqali, `@/i18n`). Yangi yoki o'zgargan matn komponentga qotirilmaydi. Hozircha faqat o'zbek.
+- Maktab sozlamalari (yotoqxona smenasi vaqti, bekor qilish oynasi, guruhlar) bitta joyda: `apps/web/src/config/school.ts` — kodga qotirilmaydi.
 - Logo: `apps/web/public/logo.png` (egasi beradi). Har sahifada: sidebar tepasida, login sahifada, PDF hisobotlarda.
   Komponent: `apps/web/src/components/brand/logo.tsx` (`tone="light"` — to'q fonda oq plashka bilan). Favicon: `apps/web/src/app/icon.png` va `apple-icon.png` (logo nusxasi).
 - Brend: **ToshbekovSchool**. Ranglar logotipdan olingan va yagona tokens faylida (`apps/web/src/styles/tokens.css`): primary `#03265C`, accent `#7F0B92`, accent-soft `#E0C1E3`, surface-soft `#BBDEFA`. Rang kodini komponentlarda qattiq yozmang — faqat token/Tailwind klasslari (`bg-primary`, `text-accent`, `bg-surface-soft` ...).

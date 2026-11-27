@@ -17,11 +17,13 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { type Column, DataTable, MobileRow } from "@/components/ui/data-table";
 import { PrivateBadge } from "@/components/ui/private-badge";
 import { StatCard } from "@/components/ui/stat-card";
+import { schoolConfig } from "@/config/school";
+import { t } from "@/i18n";
 import { alertBadge, deliveryBadge } from "@/lib/status";
 import { dormToday } from "@/mock/data";
-import { dormMessageLog, dormProblems, shift } from "@/mock/dorm";
+import { dormMessageLog, dormProblems, dormTodayByGroup, shift } from "@/mock/dorm";
 
-export const metadata = { title: "Yotoqxona" };
+export const metadata = { title: t.dorm.title };
 
 type LogRow = (typeof dormMessageLog)[number];
 
@@ -30,23 +32,33 @@ function DeliveryCell({ r }: { r: LogRow }) {
   return (
     <span className="inline-flex flex-col items-start gap-0.5">
       <Badge variant={b.variant}>{b.label}</Badge>
-      {r.status !== "yetkazildi" && (
-        <span className="text-xs text-muted-foreground">{r.attempts}/3 urinish</span>
+      {(r.status === "navbatda" || r.status === "xato") && (
+        <span className="text-xs text-muted-foreground">{t.dorm.attempts(r.attempts)}</span>
       )}
     </span>
   );
 }
 
 const logColumns: Column<LogRow>[] = [
-  { key: "t", header: "Vaqt", cell: (r) => <span className="tabular-nums">{r.time}</span> },
-  { key: "s", header: "O'quvchi", cell: (r) => <span className="font-semibold">{r.student}</span> },
-  { key: "p", header: "Ota-ona", hideOnMobile: true, cell: (r) => r.parent },
+  {
+    key: "t",
+    header: t.dorm.logCols.time,
+    cell: (r) => <span className="tabular-nums">{r.time}</span>,
+  },
+  {
+    key: "s",
+    header: t.dorm.logCols.student,
+    cell: (r) => <span className="font-semibold">{r.student}</span>,
+  },
+  { key: "p", header: t.dorm.logCols.parent, hideOnMobile: true, cell: (r) => r.parent },
   {
     key: "e",
-    header: "Hodisa",
-    cell: (r) => <Badge variant={r.event === "Uxladi" ? "info" : "danger"}>{r.event}</Badge>,
+    header: t.dorm.logCols.event,
+    cell: (r) => (
+      <Badge variant={r.event === t.dorm.markSlept ? "info" : "danger"}>{r.event}</Badge>
+    ),
   },
-  { key: "d", header: "Holat", cell: (r) => <DeliveryCell r={r} /> },
+  { key: "d", header: t.dorm.logCols.status, cell: (r) => <DeliveryCell r={r} /> },
   {
     key: "a",
     header: "",
@@ -54,63 +66,104 @@ const logColumns: Column<LogRow>[] = [
     cell: (r) =>
       r.status === "xato" ? (
         <Button variant="outline" size="sm">
-          <RotateCw /> Qayta yuborish
+          <RotateCw /> {t.dorm.resend}
         </Button>
       ) : null,
   },
 ];
 
 export default function DormDirectorPage() {
+  const s = t.dorm.stats;
   const sleptPct = Math.round((dormToday.slept / dormToday.total) * 100);
-  const failed = dormMessageLog.filter((m) => m.status !== "yetkazildi").length;
+  const notDone = dormMessageLog.filter((m) => m.status !== "yetkazildi").length;
 
   return (
     <>
       <PageHeader
-        title="Yotoqxona"
-        description={`Tungi smena ${shift.date} · navbatchi: ${shift.tutor}`}
+        title={t.dorm.title}
+        description={t.dorm.pageDescription(shift.date, shift.hours)}
         actions={
           <>
             <Button variant="outline" asChild>
               <Link href="/xabar-namunalari">
-                <MessageSquareText /> Ota-ona nimani ko&apos;radi
+                <MessageSquareText /> {t.dorm.parentSees}
               </Link>
             </Button>
             <Button asChild>
               <Link href="/yotoqxona/smena">
-                <Smartphone /> Tarbiyachi ko&apos;rinishi
+                <Smartphone /> {t.dorm.tutorView}
               </Link>
             </Button>
           </>
         }
       />
 
-      <section
-        aria-label="Bugungi holat"
-        className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4"
-      >
-        <StatCard label="Yotoqxonada" value={String(dormToday.total)} icon={BedDouble} />
+      <section aria-label={s.total} className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+        <StatCard label={s.total} value={String(dormToday.total)} icon={BedDouble} />
         <StatCard
-          label="Uxladi"
+          label={s.slept}
           value={String(dormToday.slept)}
-          hint={`${sleptPct}% · kecha 96%`}
+          hint={s.sleptHint(sleptPct)}
           icon={Moon}
           tone="success"
         />
         <StatCard
-          label="Uxlamadi"
+          label={s.notSlept}
           value={String(dormToday.notSlept)}
-          hint="Ota-onalarga xabar ketdi"
+          hint={s.notSleptHint}
           icon={MoonStar}
           tone="danger"
         />
         <StatCard
-          label="Belgilanmagan"
+          label={s.unmarked}
           value={String(dormToday.unmarked)}
-          hint="Tarbiyachiga eslatildi"
+          hint={s.unmarkedHint}
           icon={CircleHelp}
           tone="warning"
         />
+      </section>
+
+      {/* Guruhlar bo'yicha: qizlar va o'g'il bolalar alohida smena */}
+      <section aria-label={t.dorm.byGroup} className="mt-4 grid gap-3 sm:grid-cols-2">
+        {schoolConfig.dorm.groups.map(({ key, floor }) => {
+          const g = dormTodayByGroup[key];
+          const tu = shift.tutors[key];
+          return (
+            <Card key={key} className="p-4">
+              <div className="flex items-baseline justify-between gap-3">
+                <p className="font-semibold">
+                  {t.dorm.groups[key]}{" "}
+                  <span className="text-xs font-normal text-muted-foreground">
+                    · {t.dorm.floor(floor)}
+                  </span>
+                </p>
+                <p className="text-sm font-bold tabular-nums">
+                  {g.slept}/{g.total}
+                </p>
+              </div>
+              <div
+                className="mt-2 flex h-2 overflow-hidden rounded-full bg-muted"
+                role="img"
+                aria-label={`${s.slept} ${g.slept}, ${s.notSlept} ${g.notSlept}, ${s.unmarked} ${g.unmarked}`}
+              >
+                <div className="bg-primary" style={{ width: `${(g.slept / g.total) * 100}%` }} />
+                <div
+                  className="bg-destructive"
+                  style={{ width: `${(g.notSlept / g.total) * 100}%` }}
+                />
+                <div className="bg-warning" style={{ width: `${(g.unmarked / g.total) * 100}%` }} />
+              </div>
+              <p className="mt-2 text-xs text-muted-foreground">
+                {s.notSlept}: {g.notSlept} · {s.unmarked}: {g.unmarked}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {t.dorm.duty}: <span className="font-medium text-foreground">{tu.duty}</span> ·{" "}
+                {t.dorm.assistant}:{" "}
+                <span className="font-medium text-foreground">{tu.assistant}</span>
+              </p>
+            </Card>
+          );
+        })}
       </section>
 
       <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
@@ -119,10 +172,10 @@ export default function DormDirectorPage() {
             <CardHeader
               title={
                 <span className="flex items-center gap-2">
-                  <AlertTriangle className="size-4 text-accent" aria-hidden /> Muammolar
+                  <AlertTriangle className="size-4 text-accent" aria-hidden /> {t.dorm.problems}
                 </span>
               }
-              description="Bugungi kecha bo'yicha, muhimlari tepada"
+              description={t.dorm.problemsHint}
             />
             <CardContent>
               <ul className="space-y-3">
@@ -132,7 +185,7 @@ export default function DormDirectorPage() {
                       <div className="min-w-0">
                         <p className="text-sm font-semibold">{p.title}</p>
                         <p className="text-xs text-muted-foreground">
-                          {p.who} · {p.room}-xona
+                          {p.who} · {t.dorm.room(p.room)} · {t.dorm.groupShort[p.group]}
                         </p>
                       </div>
                       <Badge variant={alertBadge[p.level].variant}>
@@ -141,7 +194,7 @@ export default function DormDirectorPage() {
                     </div>
                     {p.privateNote && (
                       <div className="mt-2 rounded-md border border-dashed border-accent/40 bg-accent-soft/15 px-3 py-2">
-                        <PrivateBadge />
+                        <PrivateBadge label={t.privacy.directorTutor} />
                         <p className="mt-1 text-sm">{p.privateNote}</p>
                       </div>
                     )}
@@ -154,8 +207,8 @@ export default function DormDirectorPage() {
 
           <Card>
             <CardHeader
-              title="Xabarlar jurnali"
-              description={`Ota-onalarga Telegram xabarlari · ${failed} tasi yetkazilmagan yoki qayta urinilmoqda`}
+              title={t.dorm.log}
+              description={t.dorm.logHint(notDone, schoolConfig.dorm.undoSeconds)}
             />
             <CardContent className="px-0 pb-2">
               <DataTable
@@ -173,7 +226,7 @@ export default function DormDirectorPage() {
           </Card>
         </div>
         <div className="xl:sticky xl:top-[4.5rem] xl:self-start">
-          <ShiftSchedule todayDate="26.11" highlight={shift.tutor} />
+          <ShiftSchedule todayDate="26.11" />
         </div>
       </div>
     </>

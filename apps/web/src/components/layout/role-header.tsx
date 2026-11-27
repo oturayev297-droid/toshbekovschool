@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
+import { t } from "@/i18n";
 
 /**
  * O'quvchi / ota-ona ko'rinishlari uchun yengil sarlavha (direktor sidebar'isiz).
@@ -14,12 +15,12 @@ export function RoleHeader({ role, children }: { role: string; children?: ReactN
         <Link
           href="/"
           className="shrink-0 rounded-md focus-visible:outline-2"
-          aria-label="Bosh sahifa"
+          aria-label={t.common.home}
         >
           <Logo size={28} withText={false} />
         </Link>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm leading-tight font-bold text-primary">ToshbekovSchool</p>
+          <p className="truncate text-sm leading-tight font-bold text-primary">{t.brand}</p>
           <p className="truncate text-xs text-muted-foreground">{role}</p>
         </div>
         {children}
@@ -28,8 +29,8 @@ export function RoleHeader({ role, children }: { role: string; children?: ReactN
           className="inline-flex shrink-0 items-center gap-1 rounded-md px-2 py-1 text-xs text-muted-foreground hover:bg-secondary hover:text-foreground"
         >
           <ArrowLeft className="size-3.5" aria-hidden />
-          <span className="hidden sm:inline">Direktor paneli</span>
-          <span className="sm:hidden">Panel</span>
+          <span className="hidden sm:inline">{t.common.directorPanel}</span>
+          <span className="sm:hidden">{t.common.panel}</span>
         </Link>
       </div>
     </header>

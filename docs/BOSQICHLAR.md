@@ -58,13 +58,15 @@ toshbekovschool/
 ### 4 — Fanlar (2 ta qoidasi) va moliya
 **Ish:** fanlar/yo'nalishlar, `student_subjects` da **aniq 2 ta** cheklovi (DB va API darajasida), narx fan bo'yicha, oylik to'lov rejasi, to'lov kiritish, qarzdorlik hisobi, qarzdorlar ro'yxati.
 **Qabul:** 3-fan qo'shib bo'lmaydi; qarz to'g'ri hisoblanadi (misol hisoblar bilan test).
+**Qoida:** oylik to'lov = tanlangan 2 ta fan narxlari yig'indisi.
+**Keyinroq:** oila (aka-uka / opa-singil) chegirmasi — hozircha qo'shilmaydi.
 
 ### 5 — O'qituvchilar, xodimlar, oyliklar
 **Ish:** ro'yxatlar, lavozim/fan, oylik belgilash, oylik to'lov tarixi, moliya hisobotiga qo'shilishi.
 
 ### 6 — Telegram bot va yotoqxona
-**Ish:** bot, ota-ona bog'lash (bir martalik kod), tarbiyachi smena jadvali, yotoqxona belgilash (uxlash/turish/darsga tushish/uxladi-uxlamadi), BullMQ orqali **darhol** ota-onaga xabar, xabar jurnali, qayta urinish (xato bo'lsa).
-**Qabul:** belgilangandan 5 soniya ichida xabar boradi; yuborilmasa jurnalda ko'rinadi va qayta uriniladi.
+**Ish:** bot, ota-ona bog'lash (bir martalik kod), tarbiyachi smena jadvali, yotoqxona belgilash (uxlash/turish/darsga tushish/uxladi-uxlamadi), 5 soniyalik "Bekor qilish" oynasidan keyin BullMQ (delayed job) orqali ota-onaga xabar (bekor qilinsa hech narsa yuborilmaydi; jurnalda "5 soniya kutilmoqda" holati), qiz va o'g'il bolalar uchun alohida smena va tarbiyachilar (navbatchi + yordamchi), smena vaqti sozlamadan (`config/school.ts`, keyin Sozlamalar), xabar jurnali, qayta urinish (xato bo'lsa).
+**Qabul:** bekor qilish oynasi tugagach 5 soniya ichida xabar boradi (belgilashdan jami ≤ 10 s); bekor qilingan belgi uchun xabar ketmaydi; yuborilmasa jurnalda ko'rinadi va qayta uriniladi.
 
 ### 7 — Oshxona
 **Ish:** haftalik menyu kiritish (kun × 4 ovqat), arxiv, ota-onalarga yuborish (rejali + qo'lda tugma), ota-ona profilida ko'rinish.

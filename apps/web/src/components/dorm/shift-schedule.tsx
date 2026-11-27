@@ -1,50 +1,48 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { schoolConfig, shiftHours } from "@/config/school";
+import { t } from "@/i18n";
 import { cn } from "@/lib/utils";
-import { shiftSchedule } from "@/mock/dorm";
+import { scheduleRange, shiftSchedule } from "@/mock/dorm";
 
-/** Haftalik smena jadvali: kim qaysi kuni navbatchi. `todayDate` — "27.11" kabi. */
-export function ShiftSchedule({
-  todayDate,
-  highlight,
-}: {
-  todayDate?: string;
-  highlight?: string;
-}) {
+/**
+ * Haftalik smena jadvali: har kun — qizlar va o'g'il bolalar guruhi uchun navbatchi + yordamchi.
+ * `todayDate` — "26.11" kabi (joriy smena belgilanadi).
+ */
+export function ShiftSchedule({ todayDate }: { todayDate?: string }) {
   return (
-    <Card className="@container">
-      <CardHeader title="Smena jadvali" description="23–29 noyabr · har kecha 22:00–08:00" />
+    <Card>
+      <CardHeader
+        title={t.dorm.schedule}
+        description={t.dorm.scheduleHint(scheduleRange, shiftHours())}
+      />
       <CardContent className="px-0 pb-2">
         <ul className="divide-y">
           {shiftSchedule.map((s) => {
             const today = s.date === todayDate;
             return (
-              <li
-                key={s.day}
-                className={cn(
-                  "grid grid-cols-[5.5rem_1fr] items-center gap-x-3 gap-y-1 px-5 py-2.5 text-sm @lg:grid-cols-[7rem_1fr_1fr]",
-                  today && "bg-surface-soft/40",
-                )}
-              >
-                <div className="row-span-2 @lg:row-span-1">
-                  <p className="font-semibold">{s.day}</p>
-                  <p className="text-xs text-muted-foreground">
+              <li key={s.day} className={cn("px-5 py-3 text-sm", today && "bg-surface-soft/40")}>
+                <p className="flex items-baseline gap-2">
+                  <span className="font-semibold">{s.day}</span>
+                  <span className="text-xs text-muted-foreground">
                     {s.date}
-                    {today && " · joriy smena"}
-                  </p>
+                    {today && ` · ${t.dorm.currentShift}`}
+                  </span>
+                </p>
+                <div className="mt-1.5 grid grid-cols-2 gap-3">
+                  {schoolConfig.dorm.groups.map(({ key }) => (
+                    <div key={key} className="min-w-0">
+                      <p className="text-[11px] font-semibold tracking-wide text-muted-foreground uppercase">
+                        {t.dorm.groups[key]}
+                      </p>
+                      <p className={cn("truncate", today && "font-semibold text-accent")}>
+                        {s[key].duty}
+                      </p>
+                      <p className="truncate text-xs text-muted-foreground">
+                        {t.dorm.assistant}: {s[key].assistant}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-                {(
-                  [
-                    ["Navbatchi", s.duty],
-                    ["Yordamchi", s.assistant],
-                  ] as const
-                ).map(([label, name]) => (
-                  <p key={label} className="flex items-baseline gap-2">
-                    <span className="w-16 shrink-0 text-xs text-muted-foreground">{label}</span>
-                    <span className={cn(name === highlight && "font-semibold text-accent")}>
-                      {name}
-                    </span>
-                  </p>
-                ))}
               </li>
             );
           })}

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { designNav, directorNav, type NavItem } from "@/config/nav";
 import { cn } from "@/lib/utils";
+import { t } from "@/i18n";
 
 function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
@@ -50,15 +51,15 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   return (
     <>
-      <nav aria-label="Asosiy menyu" className="flex flex-col gap-0.5">
+      <nav aria-label={t.nav.main} className="flex flex-col gap-0.5">
         <NavLinks items={directorNav} pathname={pathname} onNavigate={onNavigate} />
       </nav>
       <nav
-        aria-label="Maket sahifalari"
+        aria-label={t.nav.design}
         className="mt-5 flex flex-col gap-0.5 border-t border-white/10 pt-4"
       >
         <p className="px-3 pb-1 text-[11px] font-semibold tracking-wide text-sidebar-foreground/70 uppercase">
-          Maket
+          {t.nav.designTitle}
         </p>
         <NavLinks items={designNav} pathname={pathname} onNavigate={onNavigate} />
       </nav>

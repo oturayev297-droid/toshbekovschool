@@ -15,28 +15,29 @@ import {
   Users,
   UtensilsCrossed,
 } from "lucide-react";
+import { t } from "@/i18n";
 
 export type NavItem = { label: string; href: string; icon: LucideIcon };
 
 // Direktor sidebar tartibi — PLAN.md 5-bo'lim
 export const directorNav: NavItem[] = [
-  { label: "Bosh sahifa", href: "/", icon: LayoutDashboard },
-  { label: "O'quvchilar", href: "/oquvchilar", icon: GraduationCap },
-  { label: "O'qituvchilar", href: "/oqituvchilar", icon: Users },
-  { label: "Xodimlar", href: "/xodimlar", icon: BriefcaseBusiness },
-  { label: "Moliya", href: "/moliya", icon: Banknote },
-  { label: "Yotoqxona", href: "/yotoqxona", icon: Moon },
-  { label: "Oshxona", href: "/oshxona", icon: UtensilsCrossed },
-  { label: "Testlar", href: "/testlar", icon: ClipboardCheck },
-  { label: "AI Markaz", href: "/ai-markaz", icon: Bot },
-  { label: "AI Xodim hisobotlari", href: "/ai-xodim", icon: FileBarChart },
-  { label: "Sozlamalar", href: "/sozlamalar", icon: Settings },
+  { label: t.nav.items.home, href: "/", icon: LayoutDashboard },
+  { label: t.nav.items.students, href: "/oquvchilar", icon: GraduationCap },
+  { label: t.nav.items.teachers, href: "/oqituvchilar", icon: Users },
+  { label: t.nav.items.staff, href: "/xodimlar", icon: BriefcaseBusiness },
+  { label: t.nav.items.finance, href: "/moliya", icon: Banknote },
+  { label: t.nav.items.dorm, href: "/yotoqxona", icon: Moon },
+  { label: t.nav.items.kitchen, href: "/oshxona", icon: UtensilsCrossed },
+  { label: t.nav.items.tests, href: "/testlar", icon: ClipboardCheck },
+  { label: t.nav.items.aiCenter, href: "/ai-markaz", icon: Bot },
+  { label: t.nav.items.aiStaff, href: "/ai-xodim", icon: FileBarChart },
+  { label: t.nav.items.settings, href: "/sozlamalar", icon: Settings },
 ];
 
 // Maket: boshqa rollar ko'rinishi va dizayn sahifalari (PLAN tartibiga kirmaydi, sidebar pastida alohida).
 // 2-bosqichda dev "rolni almashtirish" bilan almashtiriladi.
 export const designNav: NavItem[] = [
-  { label: "Xabar namunalari", href: "/xabar-namunalari", icon: MessageSquareText },
-  { label: "Ota-ona kabineti", href: "/ota-ona", icon: UsersRound },
-  { label: "AI Mentor (o'quvchi)", href: "/mentor", icon: MessagesSquare },
+  { label: t.nav.items.messageSamples, href: "/xabar-namunalari", icon: MessageSquareText },
+  { label: t.nav.items.parentCabinet, href: "/ota-ona", icon: UsersRound },
+  { label: t.nav.items.studentMentor, href: "/mentor", icon: MessagesSquare },
 ];

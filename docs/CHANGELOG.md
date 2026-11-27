@@ -53,3 +53,10 @@ Har bosqich oxirida 3–5 qator qo'shiladi.
 - Ota-ona kabinetida IQ ko'rsatilmaydi: ota-onaga faqat `parentInsight` (o'rganish uslubi + tavsiyalar) beriladi; AI Markazda IQ "Faqat direktor va psixolog" belgisi bilan, rollar matritsasiga "IQ (psixometrik baho)" qatori.
 - O'rganish uslubi va ota-onaga tavsiyalar: AI Markazda yangi tab, ota-ona "Hisobot" sahifasida va bosh sahifada.
 - BOSQICHLAR.md 13-bosqich: "Maket" guruhi va mock ma'lumotlarni production'dan olib tashlash.
+
+### Bosqich 1 — egasi qarorlari bo'yicha tuzatishlar (2026-11-27)
+
+- Yotoqxona: smena 22:00–07:00, qizlar (2-qavat) va o'g'il bolalar (1-qavat) uchun alohida smena — navbatchi + yordamchi; smena jadvalida ikkala guruh. Smena vaqti, bekor qilish oynasi va guruhlar `config/school.ts` da (kodga qotirilmagan).
+- "Uxladi/Uxlamadi" bosilgach 5 soniyalik "Bekor qilish" (teskari sanoq): bekor qilinsa avvalgi holat tiklanadi va hech narsa yuborilmaydi; jurnalda "5 soniya kutilmoqda" holati; muammolar matni jurnaldagi haqiqiy yetkazilish holatidan.
+- UI matnlari uchun `src/i18n/uz.ts` (`t`): navigatsiya, holat belgilari, yotoqxona, ota-ona qobig'i va o'rganish uslubi bloklari ko'chirildi; qolgan sahifalar keyingi bosqichlarda o'zgartirilganda ko'chiriladi (CLAUDE.md qoidasi).
+- BOSQICHLAR.md: 4-bosqichga oylik to'lov qoidasi va "oila chegirmasi — keyinroq"; 6-bosqich qabul sharti bekor qilish oynasiga moslandi (jami ≤ 10 s).

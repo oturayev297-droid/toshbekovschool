@@ -15,17 +15,18 @@ import { RoleHeader } from "@/components/layout/role-header";
 import { initials } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { type ChildBundle, children as allChildren, parentAccount } from "@/mock/parent";
+import { t } from "@/i18n";
 
 const ChildContext = createContext<ChildBundle>(allChildren[0]);
 /** Tanlangan farzand — ota-ona faqat o'z farzandlarini ko'radi */
 export const useChild = () => useContext(ChildContext);
 
 const nav: { href: string; label: string; icon: LucideIcon }[] = [
-  { href: "/ota-ona", label: "Bosh", icon: House },
-  { href: "/ota-ona/hisobot", label: "Hisobot", icon: FileText },
-  { href: "/ota-ona/tolov", label: "To'lov", icon: CreditCard },
-  { href: "/ota-ona/menyu", label: "Menyu", icon: UtensilsCrossed },
-  { href: "/ota-ona/testlar", label: "Testlar", icon: NotebookPen },
+  { href: "/ota-ona", label: t.parent.nav.home, icon: House },
+  { href: "/ota-ona/hisobot", label: t.parent.nav.report, icon: FileText },
+  { href: "/ota-ona/tolov", label: t.parent.nav.payment, icon: CreditCard },
+  { href: "/ota-ona/menyu", label: t.parent.nav.menu, icon: UtensilsCrossed },
+  { href: "/ota-ona/testlar", label: t.parent.nav.tests, icon: NotebookPen },
 ];
 
 export function ParentShell({ children }: { children: ReactNode }) {
@@ -40,13 +41,13 @@ export function ParentShell({ children }: { children: ReactNode }) {
   return (
     <ChildContext.Provider value={child}>
       <div className="min-h-screen bg-background pb-20 md:pb-8">
-        <RoleHeader role={`Ota-ona · ${parentAccount.fullName}`} />
+        <RoleHeader role={t.parent.role(parentAccount.fullName)} />
 
         <div className="mx-auto w-full max-w-3xl px-4">
           {/* Farzand tanlash */}
           <div
             role="radiogroup"
-            aria-label="Farzand"
+            aria-label={t.parent.child}
             className="flex gap-2 overflow-x-auto pt-4 pb-1"
           >
             {allChildren.map((c) => {
@@ -88,7 +89,7 @@ export function ParentShell({ children }: { children: ReactNode }) {
           </div>
 
           {/* Planshet/desktop: yuqori navigatsiya */}
-          <nav aria-label="Ota-ona bo'limlari" className="mt-3 hidden gap-1 border-b md:flex">
+          <nav aria-label={t.parent.sections} className="mt-3 hidden gap-1 border-b md:flex">
             {nav.map(({ href, label, icon: Icon }) => (
               <Link
                 key={href}
@@ -111,7 +112,7 @@ export function ParentShell({ children }: { children: ReactNode }) {
 
         {/* Mobil: pastki navigatsiya */}
         <nav
-          aria-label="Ota-ona bo'limlari"
+          aria-label={t.parent.sections}
           className="fixed inset-x-0 bottom-0 z-30 border-t bg-card/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
         >
           <ul className="mx-auto grid max-w-md grid-cols-5">

@@ -15,9 +15,13 @@ export type Subject = (typeof subjects)[number];
 export type PaymentStatus = "tolangan" | "qisman" | "qarz";
 export type DormStatus = "uxladi" | "uxlamadi" | "belgilanmagan";
 
+export type Gender = "qiz" | "ogil";
+
 export type Student = {
   id: string;
   fullName: string;
+  /** Yotoqxona guruhi uchun (qiz / o'g'il bolalar alohida smena) */
+  gender: Gender;
   grade: string;
   subjects: [Subject, Subject];
   parent: { fullName: string; phone: string; telegramLinked: boolean };
@@ -35,6 +39,7 @@ const featuredStudents: Student[] = [
   {
     id: "s-001",
     fullName: "Aziza Karimova",
+    gender: "qiz",
     grade: "9-A",
     subjects: ["English", "IT"],
     parent: { fullName: "Dilnoza Karimova", phone: "+998 90 123 45 67", telegramLinked: true },
@@ -50,6 +55,7 @@ const featuredStudents: Student[] = [
   {
     id: "s-002",
     fullName: "Jasur Rahimov",
+    gender: "ogil",
     grade: "10-B",
     subjects: ["Matematika", "SAT"],
     parent: { fullName: "Bahodir Rahimov", phone: "+998 93 222 10 08", telegramLinked: true },
@@ -65,6 +71,7 @@ const featuredStudents: Student[] = [
   {
     id: "s-003",
     fullName: "Madina Yusupova",
+    gender: "qiz",
     grade: "8-A",
     subjects: ["Kimyo", "Biologiya"],
     parent: { fullName: "Nodira Yusupova", phone: "+998 97 555 31 90", telegramLinked: false },
@@ -80,6 +87,7 @@ const featuredStudents: Student[] = [
   {
     id: "s-004",
     fullName: "Sardor Toshmatov",
+    gender: "ogil",
     grade: "11-A",
     subjects: ["SAT", "English"],
     parent: { fullName: "Akmal Toshmatov", phone: "+998 99 870 44 12", telegramLinked: true },
@@ -95,6 +103,7 @@ const featuredStudents: Student[] = [
   {
     id: "s-005",
     fullName: "Zarina Abdullayeva",
+    gender: "qiz",
     grade: "7-B",
     subjects: ["Rus tili", "Matematika"],
     parent: { fullName: "Gulnora Abdullayeva", phone: "+998 91 404 77 21", telegramLinked: true },
@@ -110,6 +119,7 @@ const featuredStudents: Student[] = [
   {
     id: "s-006",
     fullName: "Bekzod Ergashev",
+    gender: "ogil",
     grade: "10-A",
     subjects: ["IT", "Nemis tili"],
     parent: { fullName: "Shoxrux Ergashev", phone: "+998 94 610 02 55", telegramLinked: false },
@@ -383,6 +393,7 @@ function generateStudents(count: number): Student[] {
     return {
       id: `s-${String(i + 7).padStart(3, "0")}`,
       fullName: `${first} ${last}`,
+      gender: female ? "qiz" : "ogil",
       grade: GRADES[(i * 7) % GRADES.length],
       subjects: PAIRS[i % PAIRS.length],
       parent: {
@@ -406,6 +417,7 @@ function generateStudents(count: number): Student[] {
 const sibling: Student = {
   id: "s-031",
   fullName: "Kamron Karimov",
+  gender: "ogil",
   grade: "5-A",
   subjects: ["Matematika", "English"],
   parent: { fullName: "Dilnoza Karimova", phone: "+998 90 123 45 67", telegramLinked: true },

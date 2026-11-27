@@ -1,5 +1,6 @@
 import { Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { t } from "@/i18n";
 
 /**
  * Yopiq ma'lumot belgisi (salomatlik izohlari, IQ): ota-onaga yuborilmaydi va faqat
@@ -7,7 +8,7 @@ import { cn } from "@/lib/utils";
  */
 export function PrivateBadge({
   className,
-  label = "Faqat direktor va tarbiyachi",
+  label = t.privacy.directorTutor,
 }: {
   className?: string;
   label?: string;
@@ -19,7 +20,7 @@ export function PrivateBadge({
         className,
       )}
     >
-      <Lock className="size-3" aria-hidden />
+      <Lock className="size-3 shrink-0" aria-hidden />
       {label}
     </span>
   );

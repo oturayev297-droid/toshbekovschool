@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Select } from "@/components/ui/form";
 import { PrivateBadge } from "@/components/ui/private-badge";
+import { t } from "@/i18n";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { initials } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -108,7 +109,7 @@ export function AiCenter({ students }: { students: Student[] }) {
             </dd>
             <dd className="mt-1 flex flex-wrap gap-1">
               <Estimate />
-              <PrivateBadge label="Faqat direktor va psixolog" />
+              <PrivateBadge label={t.privacy.directorPsychologist} className="whitespace-normal" />
             </dd>
           </div>
         </dl>
