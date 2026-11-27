@@ -3,22 +3,31 @@ import { PageHeader } from "@/components/layout/page-header";
 import { type ChatItem, ChatPreview } from "@/components/messages/chat-preview";
 import { Card } from "@/components/ui/card";
 import { testList } from "@/mock/data";
+import { dormStudents } from "@/mock/dorm";
 import { currentWeek } from "@/mock/kitchen";
 
 export const metadata = { title: "Xabar namunalari" };
 
 const b = (s: string) => <strong className="font-semibold">{s}</strong>;
+/** Xabar ichida yangi qator (ChatPreview whitespace-pre-line bilan ko'rsatadi) */
+const NL = "\n";
+const NL2 = "\n\n";
+
+// Vaqtlar bugungi smena ro'yxatidan olinadi (yotoqxona sahifasi bilan bir xil)
+const aziza = dormStudents.find((d) => d.id === "s-001")!;
+const jasur = dormStudents.find((d) => d.id === "s-002")!;
 
 const dorm: ChatItem[] = [
   { kind: "date", label: "26-noyabr, payshanba" },
   {
     kind: "bot",
-    time: "22:10",
+    time: aziza.notifiedAt!,
     text: (
       <>
-        🌙 {b("Yotoqxona · kechki xabar")}
-        {"\n\n"}Aziza Karimova (9-A){"\n"}✅ {b("Uxladi")} — 22:05{"\n\n"}Tarbiyachi: Malika
-        Sobirova
+        🌙 {b("Yotoqxona · tungi xabar")}
+        {NL2}Aziza Karimova (9-A)
+        {NL}✅ {b("Uxladi")} — {aziza.sleep}
+        {NL2}Tarbiyachi: Malika Sobirova
       </>
     ),
     buttons: [["Tarbiyachiga yozish"]],
@@ -30,21 +39,25 @@ const dorm: ChatItem[] = [
     text: (
       <>
         ☀️ {b("Ertalabki xabar")}
-        {"\n\n"}Aziza Karimova{"\n"}Turdi: 06:30{"\n"}Darsga tushdi: 08:00{"\n\n"}Yaxshi kun
-        tilaymiz!
+        {NL2}Aziza Karimova
+        {NL}Turdi: {aziza.wake}
+        {NL}Darsga tushdi: {aziza.lesson}
+        {NL2}Yaxshi kun tilaymiz!
       </>
     ),
   },
-  { kind: "date", label: "Boshqa holat namunasi" },
+  { kind: "date", label: "Boshqa holat namunasi · 27-noyabr" },
   {
     kind: "bot",
-    time: "22:12",
+    time: jasur.notifiedAt!,
     text: (
       <>
-        🌙 {b("Yotoqxona · kechki xabar")}
-        {"\n\n"}Jasur Rahimov (10-B){"\n"}⚠️ {b("Kechasi uxlamadi")}
-        {"\n"}Tarbiyachi izohi: tish og&apos;rig&apos;i, tibbiyot xonasiga olib borildi, hozir
-        yaxshi.{"\n\n"}Savollaringiz bo&apos;lsa, tarbiyachi bilan bog&apos;laning.
+        🌙 {b("Yotoqxona · tungi xabar")}
+        {NL2}Jasur Rahimov (10-B)
+        {NL}
+        {b("Kechasi yaxshi uxlay olmadi.")}
+        {NL}Tarbiyachi holatdan xabardor va yonida. Ertalab qo&apos;shimcha ma&apos;lumot beramiz.
+        {NL2}Savollaringiz bo&apos;lsa, tarbiyachi bilan bog&apos;laning.
       </>
     ),
     buttons: [["Tarbiyachiga yozish", "Qo'ng'iroq qilish"]],
@@ -59,9 +72,9 @@ const menu: ChatItem[] = [
     text: (
       <>
         🍽 {b(`Haftalik menyu · ${currentWeek.range}`)}
-        {"\n\n"}Kechki ovqat:{"\n"}
-        {currentWeek.days.map((d) => `${d.short} — ${d.dinner}`).join("\n")}
-        {"\n\n"}Nonushta, tushlik va tushki — to&apos;liq menyuda.
+        {NL2}Kechki ovqat:{NL}
+        {currentWeek.days.map((d) => `${d.short} — ${d.dinner}`).join(NL)}
+        {NL2}Nonushta, tushlik va tushki — to&apos;liq menyuda.
       </>
     ),
     buttons: [["To'liq menyuni ko'rish"], ["Allergiya haqida xabar berish"]],
@@ -78,12 +91,13 @@ const test: ChatItem[] = [
     text: (
       <>
         📝 {b("Test natijasi")}
-        {"\n\n"}Aziza Karimova · {t.subject}
-        {"\n"}Mavzu: {t.topic}
-        {"\n"}Ball: {b(`${t.score} / 100`)} — A&apos;lo{"\n"}To&apos;g&apos;ri javoblar: {correct} /
-        25
-        {"\n"}Sinf o&apos;rtachasi: 79{"\n\n"}💬 Aziza so&apos;z boyligi bo&apos;yicha yaxshi natija
-        ko&apos;rsatdi. Keyingi qadam — Present Perfect mavzusini mustahkamlash.
+        {NL2}Aziza Karimova · {t.subject}
+        {NL}Mavzu: {t.topic}
+        {NL}Ball: {b(`${t.score} / 100`)} — A&apos;lo
+        {NL}To&apos;g&apos;ri javoblar: {correct} / 25
+        {NL}Sinf o&apos;rtachasi: 79
+        {NL2}💬 Aziza so&apos;z boyligi bo&apos;yicha yaxshi natija ko&apos;rsatdi. Keyingi qadam —
+        Present Perfect mavzusini mustahkamlash.
       </>
     ),
     buttons: [["Batafsil natija", "AI haftalik tahlil"]],
@@ -94,7 +108,7 @@ const sections = [
   {
     id: "yotoqxona",
     title: "Yotoqxona",
-    desc: "Tarbiyachi belgilashi bilan darhol: kechqurun uxlash, ertalab turish va darsga tushish.",
+    desc: "Tarbiyachi belgilashi bilan darhol. Salomatlik tafsilotlari (sabab, tibbiyot, psixolog) yuborilmaydi — faqat neytral qisqa matn.",
     items: dorm,
   },
   {

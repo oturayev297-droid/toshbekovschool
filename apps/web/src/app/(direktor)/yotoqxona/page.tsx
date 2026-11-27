@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { type Column, DataTable, MobileRow } from "@/components/ui/data-table";
+import { PrivateBadge } from "@/components/ui/private-badge";
 import { StatCard } from "@/components/ui/stat-card";
 import { alertBadge, deliveryBadge } from "@/lib/status";
 import { dormToday } from "@/mock/data";
@@ -138,6 +139,12 @@ export default function DormDirectorPage() {
                         {alertBadge[p.level].label}
                       </Badge>
                     </div>
+                    {p.privateNote && (
+                      <div className="mt-2 rounded-md border border-dashed border-accent/40 bg-accent-soft/15 px-3 py-2">
+                        <PrivateBadge />
+                        <p className="mt-1 text-sm">{p.privateNote}</p>
+                      </div>
+                    )}
                     <p className="mt-1.5 text-sm text-muted-foreground">{p.detail}</p>
                   </li>
                 ))}

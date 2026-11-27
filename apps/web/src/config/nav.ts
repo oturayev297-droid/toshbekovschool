@@ -7,6 +7,8 @@ import {
   GraduationCap,
   LayoutDashboard,
   MessageSquareText,
+  MessagesSquare,
+  UsersRound,
   type LucideIcon,
   Moon,
   Settings,
@@ -31,7 +33,10 @@ export const directorNav: NavItem[] = [
   { label: "Sozlamalar", href: "/sozlamalar", icon: Settings },
 ];
 
-// Faqat dizayn bosqichi uchun sahifalar (PLAN tartibiga kirmaydi, sidebar pastida alohida)
+// Maket: boshqa rollar ko'rinishi va dizayn sahifalari (PLAN tartibiga kirmaydi, sidebar pastida alohida).
+// 2-bosqichda dev "rolni almashtirish" bilan almashtiriladi.
 export const designNav: NavItem[] = [
   { label: "Xabar namunalari", href: "/xabar-namunalari", icon: MessageSquareText },
+  { label: "Ota-ona kabineti", href: "/ota-ona", icon: UsersRound },
+  { label: "AI Mentor (o'quvchi)", href: "/mentor", icon: MessagesSquare },
 ];

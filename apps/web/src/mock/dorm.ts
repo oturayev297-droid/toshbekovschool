@@ -1,6 +1,15 @@
 // Bosqich 1: Yotoqxona mock ma'lumoti. Ismlar to'qima.
 import { type AlertLevel, type DormStatus, students } from "./data";
 
+/** "Uxlamadi" sababi — tez tanlash tugmalari */
+export const notSleptReasons = [
+  { value: "tish", label: "Tish og'rig'i" },
+  { value: "uyqusizlik", label: "Uyqusizlik" },
+  { value: "salomatlik", label: "Sog'lig'i" },
+  { value: "boshqa", label: "Boshqa" },
+] as const;
+export type NotSleptReason = (typeof notSleptReasons)[number]["value"];
+
 export type DormStudent = {
   id: string;
   fullName: string;
@@ -11,36 +20,75 @@ export type DormStudent = {
   wake: string;
   lesson: string;
   status: DormStatus;
+  /** "Uxlamadi" belgilangan (tekshirilgan) vaqt */
+  checkedAt?: string;
+  /** Sabab va izoh — salomatlik ma'lumoti: faqat direktor va tarbiyachi ko'radi, ota-onaga ketmaydi */
+  reason?: NotSleptReason;
+  reasonNote?: string;
   /** Ota-onaga xabar yuborilgan vaqt (belgilangan bo'lsa) */
   notifiedAt?: string;
 };
 
-const sleepTimes = ["21:55", "22:05", "22:10", "22:20", "22:00", "22:15", "23:20", "22:05"];
-const rooms = ["101", "101", "102", "102", "103", "103", "104", "104", "105", "105"];
+/** "HH:MM" ga daqiqa qo'shish (yarim tundan o'tishni hisobga oladi) */
+export function addMinutes(time: string, minutes: number): string {
+  const [h, m] = time.split(":").map(Number);
+  const t = (h * 60 + m + minutes + 24 * 60) % (24 * 60);
+  return `${String(Math.floor(t / 60)).padStart(2, "0")}:${String(t % 60).padStart(2, "0")}`;
+}
 
-/** Bugungi kechki smena: yotoqxonadagi o'quvchilar */
+/** Tungi smena ichida tartiblash kaliti: 22:00 → 23:59, keyin 00:00 → 08:00 */
+export const nightOrder = (time: string) => (time < "12:00" ? `1${time}` : `0${time}`);
+
+const sleepTimes = ["22:25", "22:05", "22:10", "22:20", "22:00", "22:15", "23:20", "22:05"];
+const rooms = ["101", "101", "102", "102", "103", "103", "104", "104", "105", "105"];
+const notSlept: Record<number, Pick<DormStudent, "checkedAt" | "reason" | "reasonNote">> = {
+  1: {
+    checkedAt: "00:40",
+    reason: "tish",
+    reasonNote: "Tibbiyot xonasiga olib borildi, og'riq qoldiruvchi berildi.",
+  },
+  9: {
+    checkedAt: "01:15",
+    reason: "uyqusizlik",
+    reasonNote: "Ketma-ket 2-kecha. Psixolog suhbati tavsiya etiladi.",
+  },
+  14: {
+    checkedAt: "02:05",
+    reason: "uyqusizlik",
+    reasonNote: "Imtihondan xavotirda, suhbatlashildi.",
+  },
+};
+
+/** Bugungi tungi smena: yotoqxonadagi o'quvchilar */
 export const dormStudents: DormStudent[] = students
   .filter((s) => s.dorm)
   .map((s, i) => {
-    const status: DormStatus =
-      i === 1 || i === 9 || i === 14 ? "uxlamadi" : i % 7 === 4 ? "belgilanmagan" : "uxladi";
+    const status: DormStatus = notSlept[i] ? "uxlamadi" : i % 7 === 4 ? "belgilanmagan" : "uxladi";
+    const sleep = status === "uxladi" ? sleepTimes[i % sleepTimes.length] : "";
     return {
       id: s.id,
       parent: s.parent.fullName,
       fullName: s.fullName,
       grade: s.grade,
       room: rooms[i % rooms.length],
-      sleep: status === "uxladi" ? sleepTimes[i % sleepTimes.length] : "",
+      sleep,
       wake: status === "uxladi" ? "06:30" : "",
       lesson: status === "uxladi" ? (i % 6 === 5 ? "08:20" : "08:00") : "",
       status,
-      notifiedAt: status === "belgilanmagan" ? undefined : `22:${String(10 + i).padStart(2, "0")}`,
+      ...notSlept[i],
+      // Xabar belgilangandan 1 daqiqa ichida ketadi
+      notifiedAt:
+        status === "uxladi"
+          ? addMinutes(sleep, 1)
+          : status === "uxlamadi"
+            ? addMinutes(notSlept[i].checkedAt as string, 1)
+            : undefined,
     };
   });
 
 export const shift = {
   name: "Tungi smena",
-  hours: "20:00 – 08:00",
+  hours: "22:00 – 08:00",
   date: "26–27 noyabr",
   tutor: "Malika Sobirova",
 };
@@ -58,11 +106,8 @@ export const shiftSchedule = [
 
 export type ProblemLevel = AlertLevel;
 
-const notesNotSlept = [
-  "Tarbiyachi izohi: tish og'rig'i, tibbiyot xonasiga olib borildi.",
-  "Ketma-ket 2-kecha. Psixolog suhbati tavsiya etiladi.",
-  "Tarbiyachi izohi: imtihondan xavotirda, suhbatlashildi.",
-];
+export const reasonLabel = (r?: NotSleptReason) =>
+  notSleptReasons.find((x) => x.value === r)?.label ?? "Sabab ko'rsatilmagan";
 
 /** Direktor ko'rinishi: bugungi muammolar — smena ro'yxatidan hisoblanadi */
 export const dormProblems: {
@@ -72,16 +117,19 @@ export const dormProblems: {
   room: string;
   title: string;
   detail: string;
+  /** Salomatlik izohi — faqat direktor va tarbiyachi uchun */
+  privateNote?: string;
 }[] = [
   ...dormStudents
     .filter((d) => d.status === "uxlamadi")
-    .map((d, i) => ({
+    .map((d) => ({
       id: `p-${d.id}`,
       level: "yuqori" as const,
       who: d.fullName,
       room: d.room,
-      title: "Kechasi uxlamadi",
-      detail: `${notesNotSlept[i % notesNotSlept.length]} Ota-onaga ${d.notifiedAt} da xabar yuborildi.`,
+      title: `Kechasi uxlamadi · ${d.checkedAt}`,
+      detail: `Ota-onaga ${d.notifiedAt} da neytral xabar yuborildi.`,
+      privateNote: `${reasonLabel(d.reason)}. ${d.reasonNote ?? ""}`.trim(),
     })),
   (() => {
     const un = dormStudents.filter((d) => d.status === "belgilanmagan");
@@ -126,16 +174,5 @@ export const dormMessageLog = dormStudents
     event: d.status === "uxladi" ? "Uxladi" : "Uxlamadi",
     ...(i % 5 === 3 ? deliveries[1] : i % 7 === 5 ? deliveries[3] : deliveries[0]),
   }))
-  .sort((a, b) => b.time.localeCompare(a.time))
+  .sort((a, b) => nightOrder(b.time).localeCompare(nightOrder(a.time)))
   .slice(0, 8);
-
-/** Oxirgi 7 kecha: uxlaganlar ulushi, % */
-export const dormWeek = [
-  { day: "Ju", foiz: 97 },
-  { day: "Sh", foiz: 98 },
-  { day: "Ya", foiz: 96 },
-  { day: "Du", foiz: 97 },
-  { day: "Se", foiz: 95 },
-  { day: "Ch", foiz: 96 },
-  { day: "Pa", foiz: 95 },
-];

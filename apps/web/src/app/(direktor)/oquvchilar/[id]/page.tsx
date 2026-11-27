@@ -383,8 +383,10 @@ export default async function StudentProfilePage({ params }: { params: Promise<{
                     <dd className="text-lg font-bold tabular-nums">{m.sessions}</dd>
                   </div>
                 </dl>
-                <Button variant="outline" size="sm" className="mt-4 w-full">
-                  <MessageCircle /> Suhbatni ochish
+                <Button variant="outline" size="sm" className="mt-4 w-full" asChild>
+                  <Link href="/mentor">
+                    <MessageCircle /> Suhbatni ochish
+                  </Link>
                 </Button>
               </Card>
             ))}
@@ -422,6 +424,9 @@ export default async function StudentProfilePage({ params }: { params: Promise<{
                   ))}
                 </div>
               </div>
+              <Button variant="outline" className="mt-4" asChild>
+                <Link href="/ota-ona">Ota-ona kabinetini ko&apos;rish (maket)</Link>
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>

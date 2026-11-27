@@ -402,7 +402,25 @@ function generateStudents(count: number): Student[] {
   });
 }
 
-export const students: Student[] = [...featuredStudents, ...generateStudents(24)];
+/** Aziza'ning ukasi — ota-ona kabinetida farzand tanlashni ko'rsatish uchun (yotoqxonada emas) */
+const sibling: Student = {
+  id: "s-031",
+  fullName: "Kamron Karimov",
+  grade: "5-A",
+  subjects: ["Matematika", "English"],
+  parent: { fullName: "Dilnoza Karimova", phone: "+998 90 123 45 67", telegramLinked: true },
+  dorm: false,
+  monthlyFee: 1_700_000,
+  paid: 1_700_000,
+  paymentStatus: "tolangan",
+  lastNight: "belgilanmagan",
+  avgScore: 84,
+  birthDate: "2015-06-21",
+  enrolledAt: "2025-09-01",
+};
+
+// Ro'yxat oxiriga qo'shiladi — boshqa sahifalardagi tartib (indeksga bog'liq mock) o'zgarmaydi
+export const students: Student[] = [...featuredStudents, ...generateStudents(24), sibling];
 export const grades = [...new Set(students.map((s) => s.grade))].sort(
   (a, b) => parseInt(a) - parseInt(b) || a.localeCompare(b),
 );

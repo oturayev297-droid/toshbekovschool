@@ -39,3 +39,11 @@ Har bosqich oxirida 3–5 qator qo'shiladi.
 - Testlar: natijalar jadvali (fan filtri), mavzu bo'yicha statistika (bar + jadval, 70 ball chegarasi), o'qituvchi uchun test yaratish (fan → mavzu → sozlamalar → savollar).
 - "Xabar namunalari" (`/xabar-namunalari`, sidebar pastida "Maket"): ota-ona Telegram'da ko'radigan yotoqxona, menyu va test xabarlari chat ko'rinishida.
 - Moliya mock raqamlari bitta manbadan: chiqim = chiqim tarkibi yig'indisi, sof foyda = tushum − chiqim (413 − 290 = 123 mln). `AGENTS.md` (Codex CLI nusxasi) `.gitignore` ga qo'shildi.
+
+## Bosqich 1 — Dizayn tizimi (4-qism: tuzatishlar + C guruh, 2026-11-27)
+
+- Yotoqxona: tungi smena 22:00–08:00; "Uxladi/Uxlamadi" bosilganda vaqt avtomatik "hozir" (tahrirlanadi), xabar 1 daqiqa ichida; "Uxlamadi" uchun tez sabablar (tish og'rig'i, uyqusizlik, sog'lig'i, boshqa). Salomatlik izohlari "Faqat direktor va tarbiyachi" belgisi bilan; ota-onaga faqat neytral qisqa matn.
+- AI Markaz: o'quvchi tanlash, diagnostika, kuchli/zaif tomonlar, xulq-atvor, haftalik reja, moslashgan test, xatolar tahlili; IQ va muddat "Taxminiy ko'rsatkich". AI Mentor (`/mentor`): faqat tanlangan 2 fan ochiq, qolganlari qulflangan.
+- AI Xodim hisobotlari: kunlik/haftalik/oylik/yillik, anomaliyalar, tavsiyalar, arxiv va direktor Telegram namunasi.
+- Sozlamalar: yo'nalishlar va narxlar (2 fan narxi = oylik to'lov), Telegram ulanishi va xabar jadvali, foydalanuvchilar va rollar matritsasi (RBAC).
+- Ota-ona kabineti (`/ota-ona`, mobil-birinchi, pastki navigatsiya): farzand tanlash, haftalik AI hisobot, to'lov/qarz, menyu, yotoqxona, testlar. Vaqtinchalik `[bolim]` sahifasi olib tashlandi — barcha bo'limlar tayyor.

@@ -5,11 +5,12 @@ import { Check, Moon, MoonStar, Send, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Input, Label } from "@/components/ui/form";
+import { PrivateBadge } from "@/components/ui/private-badge";
 import { tashkentTime } from "@/lib/date";
 import { dormBadge } from "@/lib/status";
 import { cn } from "@/lib/utils";
 import type { DormStatus } from "@/mock/data";
-import type { DormStudent } from "@/mock/dorm";
+import { addMinutes, type DormStudent, notSleptReasons } from "@/mock/dorm";
 
 type Filter = "all" | DormStatus;
 const filters: { value: Filter; label: string }[] = [
@@ -43,12 +44,24 @@ export function TutorShift({ initial }: { initial: DormStudent[] }) {
   const update = (id: string, patch: Partial<DormStudent>) =>
     setRows((rs) => rs.map((r) => (r.id === id ? { ...r, ...patch } : r)));
 
-  const mark = (r: DormStudent, status: "uxladi" | "uxlamadi") =>
-    update(r.id, {
-      status,
-      notifiedAt: tashkentTime(new Date()),
-      sleep: status === "uxladi" ? r.sleep || "22:00" : "",
-    });
+  // Bosilganda vaqt avtomatik "hozir" bilan to'ladi (keyin tahrirlash mumkin).
+  // Uxladi → uxlash vaqti; Uxlamadi → tekshirilgan vaqt. Xabar 1 daqiqa ichida ketadi.
+  const mark = (r: DormStudent, status: "uxladi" | "uxlamadi") => {
+    const now = tashkentTime(new Date());
+    update(
+      r.id,
+      status === "uxladi"
+        ? {
+            status,
+            sleep: now,
+            checkedAt: undefined,
+            reason: undefined,
+            reasonNote: undefined,
+            notifiedAt: addMinutes(now, 1),
+          }
+        : { status, sleep: "", checkedAt: now, notifiedAt: addMinutes(now, 1) },
+    );
+  };
 
   return (
     <div>
@@ -166,20 +179,61 @@ export function TutorShift({ initial }: { initial: DormStudent[] }) {
                 </button>
               </div>
 
+              {r.status === "uxlamadi" && (
+                <fieldset className="mt-3 rounded-md border border-dashed border-accent/40 bg-accent-soft/15 p-3">
+                  <legend className="flex flex-wrap items-center gap-2 px-1 text-xs font-semibold">
+                    Sabab <PrivateBadge />
+                  </legend>
+                  <div
+                    role="radiogroup"
+                    aria-label="Uxlamaslik sababi"
+                    className="grid grid-cols-2 gap-1.5"
+                  >
+                    {notSleptReasons.map((o) => (
+                      <button
+                        key={o.value}
+                        type="button"
+                        role="radio"
+                        aria-checked={r.reason === o.value}
+                        onClick={() => update(r.id, { reason: o.value })}
+                        className={cn(
+                          "h-10 rounded-md border text-sm font-medium transition-colors",
+                          "focus-visible:ring-[3px] focus-visible:ring-ring/40 focus-visible:outline-none",
+                          r.reason === o.value
+                            ? "border-accent bg-accent text-accent-foreground"
+                            : "bg-card hover:bg-secondary",
+                        )}
+                      >
+                        {o.label}
+                      </button>
+                    ))}
+                  </div>
+                  {(r.reason === "boshqa" || r.reasonNote) && (
+                    <Input
+                      aria-label="Izoh"
+                      value={r.reasonNote ?? ""}
+                      onChange={(e) => update(r.id, { reasonNote: e.target.value })}
+                      placeholder="Qisqa izoh (ota-onaga ketmaydi)"
+                      className="mt-2"
+                    />
+                  )}
+                </fieldset>
+              )}
+
               <div className="mt-3 grid grid-cols-3 gap-2 [&>*]:min-w-0">
-                {(
-                  [
-                    ["sleep", "Uxlash"],
-                    ["wake", "Turish"],
-                    ["lesson", "Darsga"],
-                  ] as const
-                ).map(([key, label]) => (
+                {[
+                  r.status === "uxlamadi"
+                    ? (["checkedAt", "Tekshirildi"] as const)
+                    : (["sleep", "Uxlash"] as const),
+                  ["wake", "Turish"] as const,
+                  ["lesson", "Darsga"] as const,
+                ].map(([key, label]) => (
                   <div key={key}>
                     <Label htmlFor={`${r.id}-${key}`}>{label}</Label>
                     <Input
                       id={`${r.id}-${key}`}
                       type="time"
-                      value={r[key]}
+                      value={r[key] ?? ""}
                       onChange={(e) => update(r.id, { [key]: e.target.value })}
                       className="mt-1 h-11 min-w-0 px-1.5 text-center tabular-nums [&::-webkit-calendar-picker-indicator]:hidden"
                     />
@@ -195,7 +249,7 @@ export function TutorShift({ initial }: { initial: DormStudent[] }) {
               >
                 <Send className="size-3.5" aria-hidden />
                 {r.notifiedAt
-                  ? `Ota-onaga xabar yuborildi · ${r.notifiedAt}`
+                  ? `Ota-onaga ${r.status === "uxlamadi" ? "neytral " : ""}xabar yuborildi · ${r.notifiedAt}`
                   : "Belgilangach ota-onaga darhol xabar ketadi"}
               </p>
             </Card>

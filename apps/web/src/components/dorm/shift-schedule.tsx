@@ -12,7 +12,7 @@ export function ShiftSchedule({
 }) {
   return (
     <Card className="@container">
-      <CardHeader title="Smena jadvali" description="23–29 noyabr · har kecha 20:00–08:00" />
+      <CardHeader title="Smena jadvali" description="23–29 noyabr · har kecha 22:00–08:00" />
       <CardContent className="px-0 pb-2">
         <ul className="divide-y">
           {shiftSchedule.map((s) => {
