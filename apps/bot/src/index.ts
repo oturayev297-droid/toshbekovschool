@@ -1,4 +1,11 @@
-import { StudentSchema } from "@toshbekov/shared";
+import { Bot } from "grammy";
 
-// bot ilovasi uchun kirish nuqtasi
-console.log("bot ishga tushdi", StudentSchema.shape);
+const token = process.env.TELEGRAM_BOT_TOKEN;
+
+if (!token) {
+  console.warn("TELEGRAM_BOT_TOKEN berilmagan — bot ishga tushirilmadi.");
+} else {
+  const bot = new Bot(token);
+  bot.command("start", (ctx) => ctx.reply("Salom! ToshbekovSchool boti."));
+  bot.start();
+}
