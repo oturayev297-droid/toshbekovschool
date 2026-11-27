@@ -12,11 +12,13 @@ import {
 } from "lucide-react";
 import { AttendanceChart, RevenueChart } from "@/components/charts/charts";
 import { PageHeader } from "@/components/layout/page-header";
+import { TodayLabel } from "@/components/layout/today-label";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { type Column, DataTable } from "@/components/ui/data-table";
 import { StatCard } from "@/components/ui/stat-card";
+import { StudentMobileRow } from "@/components/students/student-mobile-row";
 import { formatMln, formatSom, initials } from "@/lib/format";
 import { paymentBadge } from "@/lib/status";
 import {
@@ -30,6 +32,7 @@ import {
   type Student,
   students,
 } from "@/mock/data";
+import { debtTotals } from "@/mock/people";
 
 export const metadata = { title: "Bosh sahifa" };
 
@@ -88,6 +91,8 @@ const studentColumns: Column<Student>[] = [
   },
 ];
 
+const studentMobileCard = (s: Student) => <StudentMobileRow student={s} />;
+
 export default function DashboardPage() {
   const sleptPct = Math.round((dormToday.slept / dormToday.total) * 100);
 
@@ -95,7 +100,7 @@ export default function DashboardPage() {
     <>
       <PageHeader
         title="Bosh sahifa"
-        description="Seshanba, 25-noyabr 2026 · maktab bo'yicha bugungi holat"
+        description={<TodayLabel suffix=" · maktab bo'yicha bugungi holat" />}
         actions={
           <>
             <Button variant="outline">Hisobot yuklab olish</Button>
@@ -107,7 +112,7 @@ export default function DashboardPage() {
       {/* Asosiy ko'rsatkichlar */}
       <section
         aria-label="Asosiy ko'rsatkichlar"
-        className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5"
+        className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-5"
       >
         <StatCard
           label="O'quvchilar"
@@ -134,8 +139,8 @@ export default function DashboardPage() {
         />
         <StatCard
           label="Qarzdorlik"
-          value={formatMln(dashboard.debtTotal)}
-          hint={`${dashboard.debtorsCount} ta o'quvchi`}
+          value={formatMln(debtTotals.debt)}
+          hint={`${debtTotals.debtors} ta o'quvchi`}
           icon={BadgeDollarSign}
           tone="warning"
         />
@@ -144,6 +149,7 @@ export default function DashboardPage() {
           value={String(dashboard.staffTotal)}
           hint={`shundan ${dashboard.teachersTotal} o'qituvchi`}
           icon={BriefcaseBusiness}
+          className="col-span-2 xl:col-span-1"
         />
       </section>
 
@@ -166,8 +172,8 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        {/* AI Xodim ogohlantirishlari */}
-        <Card className="flex flex-col">
+        {/* AI Xodim ogohlantirishlari — mobilda KPI'dan keyin birinchi */}
+        <Card className="order-first flex flex-col xl:order-none">
           <CardHeader
             title={
               <span className="flex items-center gap-2">
@@ -291,7 +297,11 @@ export default function DashboardPage() {
           }
         />
         <CardContent className="px-0 pb-2">
-          <DataTable columns={studentColumns} rows={students} />
+          <DataTable
+            columns={studentColumns}
+            rows={students.slice(0, 6)}
+            mobileCard={studentMobileCard}
+          />
         </CardContent>
       </Card>
 

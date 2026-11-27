@@ -31,7 +31,7 @@ export type Student = {
   enrolledAt: string;
 };
 
-export const students: Student[] = [
+const featuredStudents: Student[] = [
   {
     id: "s-001",
     fullName: "Aziza Karimova",
@@ -131,8 +131,6 @@ export const dashboard = {
   attendanceDelta: "-1,3% kechagidan",
   revenueMonth: 412_600_000,
   revenueDelta: "+8% o'tgan oydan",
-  debtTotal: 38_400_000,
-  debtorsCount: 21,
   staffTotal: 46,
   teachersTotal: 31,
 };
@@ -160,8 +158,8 @@ export const aiAlerts: { id: string; level: AlertLevel; title: string; detail: s
   {
     id: "a1",
     level: "yuqori",
-    title: "21 ta o'quvchida qarzdorlik",
-    detail: "Jami 38,4 mln so'm. 6 tasi 2 oydan ortiq to'lamagan.",
+    title: "12 ta o'quvchida qarzdorlik",
+    detail: "Jami 24,7 mln so'm. 4 tasi 2 oydan beri to'lamagan.",
   },
   {
     id: "a2",
@@ -312,3 +310,99 @@ export const mentorActivity = [
   { subject: "English" as Subject, minutes: 130, lastTopic: "Present Perfect", sessions: 9 },
   { subject: "IT" as Subject, minutes: 70, lastTopic: "Sikllar", sessions: 5 },
 ];
+
+// --- Qolgan o'quvchilar (deterministik generator, jami 30 ta) ---
+
+// [ism, qiz bolami]
+const FIRST: [string, boolean][] = [
+  ["Diyora", true],
+  ["Otabek", false],
+  ["Malika", true],
+  ["Bobur", false],
+  ["Sevara", true],
+  ["Ulug'bek", false],
+  ["Nilufar", true],
+  ["Javohir", false],
+  ["Shahzoda", true],
+  ["Islom", false],
+  ["Mohira", true],
+  ["Temur", false],
+];
+const LAST = [
+  "Nazarov",
+  "Saidova",
+  "Qodirov",
+  "Mirzayeva",
+  "Xolmatov",
+  "Usmonova",
+  "Aliyev",
+  "Sobirova",
+  "Ismoilov",
+  "Tursunova",
+  "Jo'rayev",
+  "Hamidova",
+];
+const PARENT_FIRST = ["Rustam", "Feruza", "Anvar", "Lola", "Sherali", "Mavluda"];
+const GRADES = [
+  "5-A",
+  "6-A",
+  "6-B",
+  "7-A",
+  "7-B",
+  "8-A",
+  "8-B",
+  "9-A",
+  "9-B",
+  "10-A",
+  "10-B",
+  "11-A",
+];
+const PAIRS: [Subject, Subject][] = [
+  ["English", "Matematika"],
+  ["IT", "English"],
+  ["SAT", "Matematika"],
+  ["Kimyo", "Biologiya"],
+  ["Rus tili", "English"],
+  ["Nemis tili", "IT"],
+  ["Matematika", "Kimyo"],
+  ["Biologiya", "English"],
+];
+const STATUS: PaymentStatus[] = ["tolangan", "tolangan", "qisman", "tolangan", "qarz"];
+const NIGHT: DormStatus[] = ["uxladi", "uxladi", "uxladi", "uxlamadi", "belgilanmagan"];
+
+function generateStudents(count: number): Student[] {
+  return Array.from({ length: count }, (_, i) => {
+    const [first, female] = FIRST[i % FIRST.length];
+    // Har 12 tadan keyin familiya siljiydi — bir xil ism-familiya takrorlanmaydi
+    const lastBase = LAST[(i * 5 + Math.floor(i / FIRST.length)) % LAST.length].replace(/a$/, "");
+    // Familiya: qizlarda "-a" qo'shimchasi (Nazarov -> Nazarova)
+    const last = female ? `${lastBase}a` : lastBase;
+    const fee = 1_600_000 + (i % 5) * 100_000;
+    const status = STATUS[i % STATUS.length];
+    const dorm = i % 3 !== 0;
+    return {
+      id: `s-${String(i + 7).padStart(3, "0")}`,
+      fullName: `${first} ${last}`,
+      grade: GRADES[(i * 7) % GRADES.length],
+      subjects: PAIRS[i % PAIRS.length],
+      parent: {
+        fullName: `${PARENT_FIRST[i % PARENT_FIRST.length]} ${lastBase}${i % 2 ? "a" : ""}`,
+        phone: `+998 9${i % 10} ${String(100 + ((i * 37) % 900))} ${String(10 + ((i * 13) % 90))} ${String(10 + ((i * 29) % 90))}`,
+        telegramLinked: i % 4 !== 0,
+      },
+      dorm,
+      monthlyFee: fee,
+      paid: status === "tolangan" ? fee : status === "qisman" ? fee / 2 : 0,
+      paymentStatus: status,
+      lastNight: dorm ? NIGHT[i % NIGHT.length] : "belgilanmagan",
+      avgScore: 58 + ((i * 17) % 40),
+      birthDate: `${2009 + (i % 6)}-${String(1 + (i % 12)).padStart(2, "0")}-${String(3 + (i % 25)).padStart(2, "0")}`,
+      enrolledAt: `${2022 + (i % 4)}-09-0${1 + (i % 5)}`,
+    };
+  });
+}
+
+export const students: Student[] = [...featuredStudents, ...generateStudents(24)];
+export const grades = [...new Set(students.map((s) => s.grade))].sort(
+  (a, b) => parseInt(a) - parseInt(b) || a.localeCompare(b),
+);

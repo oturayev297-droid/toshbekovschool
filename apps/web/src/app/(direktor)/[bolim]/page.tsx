@@ -5,7 +5,9 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { directorNav } from "@/config/nav";
 
 // Vaqtinchalik: Bosqich 1 ning ikkinchi qismida har bo'lim o'z sahifasini oladi.
-const sections = directorNav.filter((n) => n.href !== "/" && n.href !== "/oquvchilar");
+// O'z sahifasi tayyor bo'limlar shu ro'yxatdan chiqariladi.
+const built = new Set(["/", "/oquvchilar", "/oqituvchilar", "/xodimlar", "/moliya"]);
+const sections = directorNav.filter((n) => !built.has(n.href));
 
 export const dynamicParams = false;
 

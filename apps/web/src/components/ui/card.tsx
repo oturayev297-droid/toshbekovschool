@@ -22,8 +22,14 @@ export function CardHeader({
   className?: string;
 }) {
   return (
-    <div className={cn("flex items-start justify-between gap-3 px-5 pt-5", className)}>
-      <div className="min-w-0">
+    <div
+      className={cn(
+        "flex flex-wrap items-start justify-between gap-x-3 gap-y-3 px-5 pt-5",
+        className,
+      )}
+    >
+      {/* Tor ekranda sarlavha siqilib qolmasin: joy yetmasa tugma pastki qatorga tushadi */}
+      <div className="min-w-0 flex-1 basis-48">
         <h2 className="text-base font-semibold leading-tight">{title}</h2>
         {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
       </div>

@@ -1,27 +1,49 @@
-import Link from "next/link";
-import { GraduationCap } from "lucide-react";
+import { BadgeDollarSign, BedDouble, GraduationCap, UserCheck } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
+import { StudentsExplorer } from "@/components/students/students-explorer";
 import { Button } from "@/components/ui/button";
-import { EmptyState } from "@/components/ui/empty-state";
-import { students } from "@/mock/data";
+import { StatCard } from "@/components/ui/stat-card";
+import { grades, students } from "@/mock/data";
 
 export const metadata = { title: "O'quvchilar" };
 
-// Vaqtinchalik: to'liq ro'yxat (qidiruv/filtr) keyingi qadamda.
-export default function StudentsPlaceholder() {
+export default function StudentsPage() {
+  const debtors = students.filter((s) => s.paymentStatus !== "tolangan").length;
+  const inDorm = students.filter((s) => s.dorm).length;
+  const linked = students.filter((s) => s.parent.telegramLinked).length;
+
   return (
     <>
-      <PageHeader title="O'quvchilar" />
-      <EmptyState
-        icon={GraduationCap}
-        title="O'quvchilar ro'yxati maketi keyingi qadamda"
-        description="Hozircha namunaviy profilni ko'rishingiz mumkin."
-        action={
-          <Button asChild>
-            <Link href={`/oquvchilar/${students[0].id}`}>Namunaviy profilni ochish</Link>
-          </Button>
+      <PageHeader
+        title="O'quvchilar"
+        description="Ro'yxat, qidiruv va filtrlar. Profilni ochish uchun ismni bosing."
+        actions={
+          <>
+            <Button variant="outline">Excel&apos;ga eksport</Button>
+            <Button>+ O&apos;quvchi qo&apos;shish</Button>
+          </>
         }
       />
+      <section
+        aria-label="Qisqa ko'rsatkichlar"
+        className="mb-6 grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4"
+      >
+        <StatCard label="Jami" value={String(students.length)} icon={GraduationCap} />
+        <StatCard label="Yotoqxonada" value={String(inDorm)} icon={BedDouble} tone="accent" />
+        <StatCard
+          label="To'lamagan / qisman"
+          value={String(debtors)}
+          icon={BadgeDollarSign}
+          tone="warning"
+        />
+        <StatCard
+          label="Telegram ulangan"
+          value={`${linked}/${students.length}`}
+          icon={UserCheck}
+          tone="success"
+        />
+      </section>
+      <StudentsExplorer students={students} grades={grades} />
     </>
   );
 }

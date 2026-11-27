@@ -23,3 +23,11 @@ Har bosqich oxirida 3–5 qator qo'shiladi.
 - Komponentlar: Logo, Sidebar, Topbar (mobil menyu), Card, StatCard, Badge, Tabs, DataTable, EmptyState, grafiklar (Recharts).
 - Direktor shell (sidebar tartibi PLAN 5-bo'lim) va Dashboard mock ma'lumot bilan.
 - O'quvchi profili — 8 tab (PLAN 3.2); qolgan bo'limlar vaqtincha "keyingi qadamda" sahifasi.
+
+## Bosqich 1 — Dizayn tizimi (2-qism: tuzatishlar + A guruh, 2026-11-27)
+
+- Tuzatishlar: Dashboard sanasi joriy kundan (Toshkent vaqti, o'zbekcha hafta kuni); mobilda o'quvchilar jadvali kartalarga aylanadi (ism, sinf, to'lov belgisi); KPI 2 ustun, AI Xodim ogohlantirishlari KPI'dan keyin; profil tablarining chetlarida fade.
+- O'quvchilar ro'yxati: qidiruv (o'quvchi/ota-ona ismi), sinf/fan/to'lov filtrlari, bo'sh holat, qisqa ko'rsatkichlar.
+- Moliya: tushum/chiqim grafigi, chiqim tarkibi, qarzdorlar ro'yxati, oylik to'lovlar jadvali (o'quvchi × oy); qarzdorlik raqamlari Dashboard bilan bir xil manbadan.
+- O'qituvchilar va Xodimlar: ro'yxat, fan/lavozim, ish soati/smena, oylik holati, oylik to'lov tarixi.
+- Umumiy: `Form` (Input/Select/SearchInput), `MobileRow`, StatCard container query (tor kartada ikonka tepada), CardHeader tor ekranda o'raladi.
