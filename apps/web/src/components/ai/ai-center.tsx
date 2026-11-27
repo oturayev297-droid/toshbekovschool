@@ -44,7 +44,7 @@ function Estimate() {
   );
 }
 
-/** `hideIq` — zavuch ko'rinishi: IQ bloki, IQ izohi va xulq-atvor tahlili ko'rsatilmaydi (faqat direktor/psixolog) */
+/** `hideIq` — zavuch ko'rinishi: IQ yopiq; xulq-atvor faqat umumiy (davomat, intizom, test faolligi), salomatlik va psixolog yozuvlarisiz */
 export function AiCenter({ students, hideIq = false }: { students: Student[]; hideIq?: boolean }) {
   const [id, setId] = useState(students[0].id);
   const s = students.find((x) => x.id === id) ?? students[0];
@@ -140,11 +140,9 @@ export function AiCenter({ students, hideIq = false }: { students: Student[]; hi
           <TabsTrigger value="uslub">
             <Brain className="size-4" /> O&apos;rganish uslubi
           </TabsTrigger>
-          {!hideIq && (
-            <TabsTrigger value="xulq">
-              <Activity className="size-4" /> Xulq-atvor
-            </TabsTrigger>
-          )}
+          <TabsTrigger value="xulq">
+            <Activity className="size-4" /> {hideIq ? "Xulq-atvor (umumiy)" : "Xulq-atvor"}
+          </TabsTrigger>
           <TabsTrigger value="reja">
             <CalendarDays className="size-4" /> O&apos;quv rejasi
           </TabsTrigger>
@@ -279,49 +277,51 @@ export function AiCenter({ students, hideIq = false }: { students: Student[]; hi
           </div>
         </TabsContent>
 
-        {!hideIq && (
-          <TabsContent value="xulq">
-            <Card>
-              <CardHeader
-                title="Xulq-atvor tahlili"
-                description="Yotoqxona, davomat, test va mentor faolligi ma'lumotlaridan · oxirgi 7 kun"
-                action={
-                  <PrivateBadge
-                    label={t.privacy.directorPsychologist}
-                    className="whitespace-normal"
-                  />
-                }
-              />
-              <CardContent>
-                <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-                  {p.behavior.map((b) => (
-                    <div key={b.label} className="rounded-md bg-muted/60 p-3">
-                      <dt className="text-xs text-muted-foreground">{b.label}</dt>
-                      <dd className="mt-1 flex items-center gap-1.5 text-sm font-bold">
-                        {b.tone === "good" ? (
-                          <CheckCircle2
-                            className="size-4 shrink-0 text-success"
-                            aria-label="yaxshi"
-                          />
-                        ) : (
-                          <AlertCircle
-                            className="size-4 shrink-0 text-warning"
-                            aria-label="e'tibor"
-                          />
-                        )}
-                        {b.value}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-                <div className="mt-4 flex items-start gap-3 rounded-md border bg-surface-soft/30 p-4 text-sm">
-                  <Sparkles className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
-                  <p>{p.behaviorSummary}</p>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        )}
+        <TabsContent value="xulq">
+          <Card>
+            <CardHeader
+              title={hideIq ? "Xulq-atvor (umumiy)" : "Xulq-atvor tahlili"}
+              description={
+                hideIq
+                  ? "Davomat, intizom va test faolligi · oxirgi 7 kun (IQ, salomatlik va psixolog yozuvlarisiz)"
+                  : "Yotoqxona, davomat, test va mentor faolligi ma'lumotlaridan · oxirgi 7 kun"
+              }
+              action={
+                <PrivateBadge
+                  label={hideIq ? t.privacy.generalBehavior : t.privacy.directorPsychologist}
+                  className="whitespace-normal"
+                />
+              }
+            />
+            <CardContent>
+              <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+                {(hideIq ? p.generalBehavior : p.behavior).map((b) => (
+                  <div key={b.label} className="rounded-md bg-muted/60 p-3">
+                    <dt className="text-xs text-muted-foreground">{b.label}</dt>
+                    <dd className="mt-1 flex items-center gap-1.5 text-sm font-bold">
+                      {b.tone === "good" ? (
+                        <CheckCircle2
+                          className="size-4 shrink-0 text-success"
+                          aria-label="yaxshi"
+                        />
+                      ) : (
+                        <AlertCircle
+                          className="size-4 shrink-0 text-warning"
+                          aria-label="e'tibor"
+                        />
+                      )}
+                      {b.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="mt-4 flex items-start gap-3 rounded-md border bg-surface-soft/30 p-4 text-sm">
+                <Sparkles className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
+                <p>{hideIq ? p.generalSummary : p.behaviorSummary}</p>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
         {/* 4. Shaxsiy o'quv rejasi */}
         <TabsContent value="reja">

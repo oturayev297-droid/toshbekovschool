@@ -136,6 +136,6 @@ Maket bo'yicha, 2-bosqichda tegishli bo'lim qurilganda bajariladi:
 | --- | --- | --- |
 | 0 — Poydevor | `bosqich-0-poydevor` | qabul qilindi (deploy keyinroq) |
 | 1 — Dizayn tizimi | `bosqich-1-dizayn` | qabul qilindi (2026-11-27; merge kutilmoqda) |
-| 1b — Kabinetlar maketi | `bosqich-1-dizayn` | ko'rib chiqishda |
+| 1b — Kabinetlar maketi | `bosqich-1-dizayn` | qabul qilindi (2026-11-27) |
 | 2 — DB va API asosi | — | kutilmoqda |
 | 3–13 | — | kutilmoqda |

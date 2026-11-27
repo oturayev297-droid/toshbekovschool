@@ -59,6 +59,7 @@ export const uz = {
   privacy: {
     directorTutor: "Direktor, tarbiyachi, psixolog",
     directorPsychologist: "Faqat direktor va psixolog",
+    generalBehavior: "Direktor, psixolog, zavuch",
   },
 
   dorm: {

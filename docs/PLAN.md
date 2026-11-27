@@ -37,11 +37,11 @@ toshbekovschool/
 | Rol | Nima ko'radi |
 |---|---|
 | Direktor / Platforma rahbari | Hamma narsa, hisobotlar, AI Xodim, sozlamalar |
-| Zavuch (o'quv ishlari bo'yicha) | Dars jadvali, davomat nazorati, o'qituvchilar sifati, testlar nazorati, o'quvchilar akademik holati, AI Markaz (IQ'siz). Moliya va oyliklarni ko'rmaydi |
+| Zavuch (o'quv ishlari bo'yicha) | Dars jadvali, davomat nazorati, o'qituvchilar sifati, testlar nazorati, o'quvchilar akademik holati, AI Markaz (IQ'siz), xulq-atvor (umumiy: davomat, intizom, test faolligi). IQ, salomatlik izohlari, psixolog yozuvlari, moliya va oyliklarni ko'rmaydi |
 | Admin / Buxgalter | Moliya, o'quvchi/xodim ro'yxati |
 | O'qituvchi | O'qituvchi kabineti: guruhlarim, davomat, test yaratish/baholash, natijalar, dars jadvali, o'z oyligim |
 | Tarbiyachi (smena) | Yotoqxona bo'limi |
-| Psixolog | IQ va xulq-atvor tahlili, salomatlik izohlari, o'quvchilar ro'yxati — faqat ko'rish. Moliya va xodimlarni ko'rmaydi |
+| Psixolog | IQ va xulq-atvor tahlili, salomatlik izohlari, o'quvchilar ro'yxati — faqat ko'rish; psixolog yozuvlari (o'zi yuritadi). Moliya va xodimlarni ko'rmaydi |
 | Oshpaz/Menejer | Oshxona menyusi |
 | Ota-ona | Faqat o'z farzandi(lari): hisobot, to'lov, test, menyu |
 | O'quvchi | O'quvchi kabineti: 2 ta fan, 2 ta AI mentor, testlar, natijalar, o'quv rejasi, dars jadvali, menyu |

@@ -229,6 +229,24 @@ export function aiProfile(s: Student) {
       sleptNights !== null && sleptNights < 6
         ? "Bu hafta uyqu tartibi biroz buzilgan — bu test natijalariga ta'sir qilishi mumkin. Tarbiyachi bilan birga kechki tartibni yengillashtirish tavsiya etiladi."
         : "Kun tartibi barqaror, darslarga va testlarga faol qatnashmoqda. Hozirgi ritmni saqlash tavsiya etiladi.",
+    /** Xulq-atvor (umumiy) — zavuch ham ko'radi: davomat, intizom, test faolligi (uyqu/salomatlik va psixolog yozuvlarisiz) */
+    generalBehavior: [
+      { label: "Davomat", value: `${96 - (seed % 4)}%`, tone: "good" as const },
+      {
+        label: "Intizom",
+        value: seed % 5 === 3 ? "1 ta ogohlantirish" : "Ogohlantirish yo'q",
+        tone: seed % 5 === 3 ? ("watch" as const) : ("good" as const),
+      },
+      {
+        label: "Test faolligi",
+        value: `${8 - (seed % 3)}/9 topshirildi`,
+        tone: seed % 3 === 2 ? ("watch" as const) : ("good" as const),
+      },
+    ],
+    generalSummary:
+      seed % 3 === 2
+        ? "Darslarga muntazam qatnashmoqda; testlarni o'z vaqtida topshirishga e'tibor kerak."
+        : "Darslarga muntazam qatnashmoqda, intizom va test faolligi yaxshi.",
     learningStyle: learningStyles[knownStyle[s.id] ?? seed % learningStyles.length],
     // IQ — psixometrik baho, qat'iy hukm emas (PLAN 3.6). Faqat direktor/psixolog ko'radi,
     // ota-onaga hech qachon yuborilmaydi (parentInsight ga kirmaydi). Oraliq sifatida ko'rsatiladi.

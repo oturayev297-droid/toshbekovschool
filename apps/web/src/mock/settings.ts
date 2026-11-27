@@ -297,6 +297,34 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     },
   },
   {
+    section: "Xulq-atvor (umumiy)",
+    access: {
+      direktor: "full",
+      zavuch: "view",
+      admin: "none",
+      oqituvchi: "none",
+      tarbiyachi: "none",
+      psixolog: "view",
+      oshpaz: "none",
+      otaona: "none",
+      oquvchi: "none",
+    },
+  },
+  {
+    section: "Psixolog yozuvlari",
+    access: {
+      direktor: "full",
+      zavuch: "none",
+      admin: "none",
+      oqituvchi: "none",
+      tarbiyachi: "none",
+      psixolog: "full",
+      oshpaz: "none",
+      otaona: "none",
+      oquvchi: "none",
+    },
+  },
+  {
     section: "Salomatlik izohlari",
     access: {
       direktor: "full",

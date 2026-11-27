@@ -88,3 +88,8 @@ Har bosqich oxirida 3–5 qator qo'shiladi.
 - Dars jadvali (`/dars-jadvali`): sinf / o'qituvchi / xona bo'yicha, kun × dars, bugungi kun belgisi; mock o'qituvchilar guruhlaridan to'qnashuvsiz hisoblanadi.
 - Kabinetlar (mobil-birinchi, pastki navigatsiya): O'qituvchi (`/oqituvchi`: bugungi darslar, guruhlar, davomat belgilash, test yaratish/baholash, jadval, oylik), O'quvchi (`/oquvchi`: 2 fan va mentor, testlar/natijalar, reja, jadval, menyu), Zavuch (`/zavuch`: jadval, davomat nazorati, o'qituvchilar sifati, akademik holat, testlar nazorati, AI Markaz IQ va xulq-atvorsiz).
 - Rollar jadvaliga zavuch ustuni va "Dars jadvali", "Davomat", "O'qituvchilar sifati" qatorlari.
+
+### Bosqich 1b — zavuch: xulq-atvor (umumiy); 1 va 1b qabul (2026-11-27)
+
+- Zavuch uchun "Xulq-atvor (umumiy)" tabi: davomat, intizom, test faolligi; IQ, salomatlik izohlari va psixolog yozuvlari yopiq. Rollar jadvaliga "Xulq-atvor (umumiy)" va "Psixolog yozuvlari" qatorlari; PLAN.md 2-bo'lim moslandi.
+- Egasi 1 va 1b bosqichlarini qabul qildi.
