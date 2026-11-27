@@ -4,6 +4,7 @@ import { type ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
 import {
   BedDouble,
+  Brain,
   CheckCircle2,
   ChevronRight,
   CreditCard,
@@ -102,8 +103,12 @@ export function ParentHome() {
           {c.weekly.week}
         </p>
         <p className="mt-2 line-clamp-3 text-sm leading-relaxed">{c.weekly.summary}</p>
+        <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground">
+          <Brain className="size-3.5 text-accent" aria-hidden /> O&apos;rganish uslubi:{" "}
+          <span className="font-semibold text-foreground">{c.insight.learningStyle.style}</span>
+        </p>
         <Button variant="outline" size="sm" className="mt-3" asChild>
-          <Link href="/ota-ona/hisobot">To&apos;liq hisobot</Link>
+          <Link href="/ota-ona/hisobot">Hisobot va tavsiyalar</Link>
         </Button>
       </Card>
 
@@ -197,6 +202,44 @@ export function ParentReport() {
               </ul>
             </div>
           </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader
+          title="O'rganish uslubi"
+          description="AI kuzatuvi asosida (testlar, mentor suhbatlari) · taxminiy, vaqt o'tishi bilan o'zgarishi mumkin"
+        />
+        <CardContent>
+          <p className="flex items-center gap-2 font-semibold text-primary">
+            <Brain className="size-4 text-accent" aria-hidden /> {c.insight.learningStyle.style}
+          </p>
+          <p className="mt-1.5 text-sm leading-relaxed">{c.insight.learningStyle.summary}</p>
+          <ul className="mt-3 space-y-1.5">
+            {c.insight.learningStyle.signs.map((x) => (
+              <li key={x} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-accent" />
+                {x}
+              </li>
+            ))}
+          </ul>
+        </CardContent>
+      </Card>
+      <Card className="border-accent/30 bg-accent-soft/15">
+        <CardHeader
+          title="Uyda qanday yordam berish mumkin"
+          description="Ota-ona uchun tavsiyalar"
+        />
+        <CardContent>
+          <ol className="space-y-3">
+            {c.insight.tips.map((x, i) => (
+              <li key={x} className="flex items-start gap-3 text-sm">
+                <span className="grid size-6 shrink-0 place-items-center rounded-full bg-accent text-xs font-bold text-accent-foreground">
+                  {i + 1}
+                </span>
+                {x}
+              </li>
+            ))}
+          </ol>
         </CardContent>
       </Card>
       <Card>

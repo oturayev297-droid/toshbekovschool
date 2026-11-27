@@ -2,10 +2,16 @@ import { Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
- * Salomatlik va shaxsiy izohlar uchun belgi: bu ma'lumot ota-onaga yuborilmaydi
- * va faqat direktor hamda tarbiyachiga ko'rinadi (RBAC — 2-bosqichda API darajasida).
+ * Yopiq ma'lumot belgisi (salomatlik izohlari, IQ): ota-onaga yuborilmaydi va faqat
+ * ko'rsatilgan rollarga ko'rinadi (RBAC — 2-bosqichda API darajasida).
  */
-export function PrivateBadge({ className }: { className?: string }) {
+export function PrivateBadge({
+  className,
+  label = "Faqat direktor va tarbiyachi",
+}: {
+  className?: string;
+  label?: string;
+}) {
   return (
     <span
       className={cn(
@@ -14,7 +20,7 @@ export function PrivateBadge({ className }: { className?: string }) {
       )}
     >
       <Lock className="size-3" aria-hidden />
-      Faqat direktor va tarbiyachi
+      {label}
     </span>
   );
 }

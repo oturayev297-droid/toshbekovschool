@@ -9,6 +9,7 @@ import {
   testResults,
   weeklyAiReport,
 } from "./data";
+import { aiProfile, type ParentInsight, parentInsight } from "./ai";
 import { dormStudents } from "./dorm";
 
 export const parentAccount = {
@@ -20,6 +21,8 @@ export type ChildBundle = {
   student: Student;
   weekly: { week: string; summary: string; strengths: string[]; focus: string[] };
   weeklyArchive: { week: string; headline: string }[];
+  /** O'rganish uslubi va tavsiyalar — IQsiz, faqat ota-onaga ruxsat etilgan qism */
+  insight: ParentInsight;
   payments: { id: string; month: string; amount: number; date: string; status: PaymentStatus }[];
   dueDate: string;
   tests: { id: string; subject: string; topic: string; score: number; date: string }[];
@@ -38,6 +41,7 @@ const azizaTonight = dormStudents.find((d) => d.id === "s-001");
 export const children: ChildBundle[] = [
   {
     student: aziza,
+    insight: parentInsight(aiProfile(aziza)),
     weekly: weeklyAiReport,
     weeklyArchive: [
       {
@@ -67,6 +71,7 @@ export const children: ChildBundle[] = [
   },
   {
     student: kamron,
+    insight: parentInsight(aiProfile(kamron)),
     weekly: {
       week: "18–24 noyabr 2026",
       summary:

@@ -117,6 +117,48 @@ function mentorMinutes(id: string, seed: number) {
   return `${Math.floor(total / 60)} soat ${total % 60} daq / hafta`;
 }
 
+/** O'rganish uslubi — AI kuzatuvi asosida (testlar, mentor suhbatlari), taxminiy */
+const learningStyles = [
+  {
+    style: "Ko'rib o'rganuvchi (vizual)",
+    summary:
+      "Sxema, jadval va rangli belgilar bilan yaxshi eslab qoladi; matnni o'qib tez tushunadi.",
+    signs: [
+      "Diagramma bor savollarda natijasi yuqori",
+      "Mentor bilan ishlaganda misollarni chizib so'raydi",
+    ],
+    tips: [
+      "Yangi so'z va formulalarni rangli kartochkalarga yozishni taklif qiling",
+      "Murakkab mavzuni qog'ozda sxema qilib tushuntirib berishini so'rang",
+      "Kuniga 20–30 daqiqa telefonsiz, tinch joyda o'qish vaqti ajrating",
+    ],
+  },
+  {
+    style: "Amaliy o'rganuvchi",
+    summary: "O'zi bajarib, mashq qilib o'rganadi; qisqa va ko'p takrorlar unga mos.",
+    signs: ["Mashqlardan keyingi testlarda o'sish tez", "Uzun nazariy matnlarda tez charchaydi"],
+    tips: [
+      "Uy vazifasini 15 daqiqalik qisqa bo'laklarga bo'lishga yordam bering",
+      "O'rganganini hayotiy misolda (xarid, retsept, o'yin) qo'llashni so'rang",
+      "Har kuni kichik yutug'ini maqtang — bu motivatsiyani oshiradi",
+    ],
+  },
+  {
+    style: "Eshitib o'rganuvchi (audial)",
+    summary: "Tushuntirish, savol-javob va muhokama orqali yaxshi tushunadi.",
+    signs: [
+      "Mentor bilan suhbatdan keyin natija yaxshilanadi",
+      "Ovoz chiqarib takrorlashni yoqtiradi",
+    ],
+    tips: [
+      "Kun oxirida «Bugun nimani o'rganding?» deb so'rab, o'zi gapirib berishini tinglang",
+      "Ingliz tili uchun qisqa audio va podkastlar foydali",
+      "Yangi mavzuni sizga «o'qituvchi» bo'lib tushuntirishini so'rang",
+    ],
+  },
+];
+const knownStyle: Record<string, number> = { "s-001": 0 };
+
 /** O'quvchi uchun AI tahlil profili (deterministik, o'quvchi ma'lumotidan) */
 export function aiProfile(s: Student) {
   const seed = parseInt(s.id.slice(2), 10);
@@ -187,7 +229,9 @@ export function aiProfile(s: Student) {
       sleptNights !== null && sleptNights < 6
         ? "Bu hafta uyqu tartibi biroz buzilgan — bu test natijalariga ta'sir qilishi mumkin. Tarbiyachi bilan birga kechki tartibni yengillashtirish tavsiya etiladi."
         : "Kun tartibi barqaror, darslarga va testlarga faol qatnashmoqda. Hozirgi ritmni saqlash tavsiya etiladi.",
-    // IQ — psixometrik baho, qat'iy hukm emas (PLAN 3.6). Oraliq sifatida ko'rsatiladi.
+    learningStyle: learningStyles[knownStyle[s.id] ?? seed % learningStyles.length],
+    // IQ — psixometrik baho, qat'iy hukm emas (PLAN 3.6). Faqat direktor/psixolog ko'radi,
+    // ota-onaga hech qachon yuborilmaydi (parentInsight ga kirmaydi). Oraliq sifatida ko'rsatiladi.
     iqRange: [100 + (seed % 4) * 3, 112 + (seed % 4) * 3] as const,
     plan: ["Du", "Se", "Ch", "Pa", "Ju", "Sh"].map((day, i) => {
       const t = weak[i % Math.max(1, weak.length)] ?? allTopics[i % allTopics.length];
@@ -219,6 +263,22 @@ export function aiProfile(s: Student) {
 }
 
 export type AiProfile = ReturnType<typeof aiProfile>;
+
+/**
+ * Ota-onaga ko'rinadigan qism — faqat shu maydonlar. IQ, xulq-atvor signallari va
+ * maqsad muddati bahosi bu yerga KIRMAYDI (2-bosqichda API darajasida xuddi shunday filtr).
+ */
+export function parentInsight(p: AiProfile) {
+  return {
+    learningStyle: {
+      style: p.learningStyle.style,
+      summary: p.learningStyle.summary,
+      signs: p.learningStyle.signs,
+    },
+    tips: p.learningStyle.tips,
+  };
+}
+export type ParentInsight = ReturnType<typeof parentInsight>;
 
 // --- AI Mentor ---
 

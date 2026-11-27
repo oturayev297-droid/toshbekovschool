@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   Activity,
   AlertCircle,
+  Brain,
   BrainCircuit,
   CalendarDays,
   CheckCircle2,
@@ -20,6 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Select } from "@/components/ui/form";
+import { PrivateBadge } from "@/components/ui/private-badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { initials } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -104,15 +106,17 @@ export function AiCenter({ students }: { students: Student[] }) {
             <dd className="mt-0.5 text-lg font-bold tabular-nums">
               {p.iqRange[0]}–{p.iqRange[1]}
             </dd>
-            <dd className="mt-1">
+            <dd className="mt-1 flex flex-wrap gap-1">
               <Estimate />
+              <PrivateBadge label="Faqat direktor va psixolog" />
             </dd>
           </div>
         </dl>
         <p className="mt-3 flex items-start gap-2 text-xs text-muted-foreground">
           <Info className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-          IQ va muddat — qat&apos;iy hukm emas, taxminiy ko&apos;rsatkich. Ota-onaga faqat muloyim
-          va konstruktiv tilda ko&apos;rsatiladi, bolaga salbiy yorliq qo&apos;yilmaydi.
+          IQ va muddat — qat&apos;iy hukm emas, taxminiy ko&apos;rsatkich. IQ ota-onaga
+          ko&apos;rsatilmaydi: ota-ona kabinetida faqat o&apos;rganish uslubi va tavsiyalar, muloyim
+          va konstruktiv tilda. Bolaga salbiy yorliq qo&apos;yilmaydi.
         </p>
       </Card>
 
@@ -123,6 +127,9 @@ export function AiCenter({ students }: { students: Student[] }) {
           </TabsTrigger>
           <TabsTrigger value="tomonlar">
             <TrendingUp className="size-4" /> Kuchli / zaif
+          </TabsTrigger>
+          <TabsTrigger value="uslub">
+            <Brain className="size-4" /> O&apos;rganish uslubi
           </TabsTrigger>
           <TabsTrigger value="xulq">
             <Activity className="size-4" /> Xulq-atvor
@@ -213,6 +220,54 @@ export function AiCenter({ students }: { students: Student[] }) {
         </TabsContent>
 
         {/* 3. Xulq-atvor tahlili */}
+        <TabsContent value="uslub">
+          <div className="grid gap-6 lg:grid-cols-2">
+            <Card>
+              <CardHeader
+                title="O'rganish uslubi"
+                description="AI kuzatuvi asosida (testlar, mentor suhbatlari) · taxminiy"
+              />
+              <CardContent>
+                <p className="flex items-center gap-2 font-semibold text-primary">
+                  <Brain className="size-4 text-accent" aria-hidden /> {p.learningStyle.style}
+                </p>
+                <p className="mt-1.5 text-sm leading-relaxed">{p.learningStyle.summary}</p>
+                <ul className="mt-3 space-y-1.5">
+                  {p.learningStyle.signs.map((x) => (
+                    <li key={x} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-accent" />
+                      {x}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader
+                title="Ota-onaga tavsiyalar"
+                description="Ota-ona kabinetida aynan shu ko'rinadi (IQsiz)"
+                action={
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/ota-ona/hisobot">Ota-ona ko&apos;rinishi</Link>
+                  </Button>
+                }
+              />
+              <CardContent>
+                <ol className="space-y-3">
+                  {p.learningStyle.tips.map((x, i) => (
+                    <li key={x} className="flex items-start gap-3 text-sm">
+                      <span className="grid size-6 shrink-0 place-items-center rounded-full bg-accent text-xs font-bold text-accent-foreground">
+                        {i + 1}
+                      </span>
+                      {x}
+                    </li>
+                  ))}
+                </ol>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
         <TabsContent value="xulq">
           <Card>
             <CardHeader

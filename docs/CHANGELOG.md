@@ -47,3 +47,9 @@ Har bosqich oxirida 3–5 qator qo'shiladi.
 - AI Xodim hisobotlari: kunlik/haftalik/oylik/yillik, anomaliyalar, tavsiyalar, arxiv va direktor Telegram namunasi.
 - Sozlamalar: yo'nalishlar va narxlar (2 fan narxi = oylik to'lov), Telegram ulanishi va xabar jadvali, foydalanuvchilar va rollar matritsasi (RBAC).
 - Ota-ona kabineti (`/ota-ona`, mobil-birinchi, pastki navigatsiya): farzand tanlash, haftalik AI hisobot, to'lov/qarz, menyu, yotoqxona, testlar. Vaqtinchalik `[bolim]` sahifasi olib tashlandi — barcha bo'limlar tayyor.
+
+### Bosqich 1 — C guruh tuzatishlari (2026-11-27)
+
+- Ota-ona kabinetida IQ ko'rsatilmaydi: ota-onaga faqat `parentInsight` (o'rganish uslubi + tavsiyalar) beriladi; AI Markazda IQ "Faqat direktor va psixolog" belgisi bilan, rollar matritsasiga "IQ (psixometrik baho)" qatori.
+- O'rganish uslubi va ota-onaga tavsiyalar: AI Markazda yangi tab, ota-ona "Hisobot" sahifasida va bosh sahifada.
+- BOSQICHLAR.md 13-bosqich: "Maket" guruhi va mock ma'lumotlarni production'dan olib tashlash.

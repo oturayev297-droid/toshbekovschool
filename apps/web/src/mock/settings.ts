@@ -204,6 +204,18 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
     },
   },
   {
+    section: "IQ (psixometrik baho)",
+    access: {
+      direktor: "full",
+      admin: "none",
+      oqituvchi: "none",
+      tarbiyachi: "none",
+      oshpaz: "none",
+      otaona: "none",
+      oquvchi: "none",
+    },
+  },
+  {
     section: "Salomatlik izohlari",
     access: {
       direktor: "full",
@@ -239,6 +251,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
       oquvchi: "own",
     },
   },
+  // Ota-ona: o'z farzandining o'rganish uslubi va tavsiyalari (IQsiz)
   {
     section: "AI Markaz",
     access: {

@@ -87,6 +87,7 @@ toshbekovschool/
 
 ### 13 — Mustahkamlash va ishga tushirish
 **Ish:** to'liq rol testlari, yuklama sinovi, zaxira (DB backup), xatolar monitoringi, domen, staging → production, 404/500 sahifalar.
+**Tozalash:** "Maket" guruhini (sidebar: Xabar namunalari, Ota-ona kabineti, AI Mentor havolalari; "Direktor paneli" qaytish havolalari) va mock ma'lumotlarni (`apps/web/src/mock`, "Maket" belgilari) production'dan olib tashlash.
 **Yakun:** barcha bo'limlar qanday ishlashi haqida PDF qo'llanma.
 
 ## D. Claude Code'ga birinchi buyruq (0-bosqich)
