@@ -43,6 +43,7 @@ toshbekovschool/
 | Oshpaz/Menejer | Oshxona menyusi |
 | Ota-ona | Faqat o'z farzandi(lari): hisobot, to'lov, test, menyu |
 | O'quvchi | O'z AI mentorlari, testlar, o'quv rejasi |
+| Psixolog | IQ va xulq-atvor tahlili, salomatlik izohlari, o'quvchilar ro'yxati — faqat ko'rish. Moliya va xodimlarni ko'rmaydi |
 
 ## 3. Bo'limlar (sahifalar xaritasi)
 

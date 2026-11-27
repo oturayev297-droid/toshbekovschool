@@ -46,13 +46,14 @@ export const telegramSettings = {
 };
 
 export type Role =
-  "direktor" | "admin" | "oqituvchi" | "tarbiyachi" | "oshpaz" | "otaona" | "oquvchi";
+  "direktor" | "admin" | "oqituvchi" | "tarbiyachi" | "psixolog" | "oshpaz" | "otaona" | "oquvchi";
 
 export const roles: { key: Role; label: string }[] = [
   { key: "direktor", label: "Direktor" },
   { key: "admin", label: "Admin / Buxgalter" },
   { key: "oqituvchi", label: "O'qituvchi" },
   { key: "tarbiyachi", label: "Tarbiyachi" },
+  { key: "psixolog", label: "Psixolog" },
   { key: "oshpaz", label: "Oshpaz" },
   { key: "otaona", label: "Ota-ona" },
   { key: "oquvchi", label: "O'quvchi" },
@@ -131,6 +132,14 @@ export const users: {
     active: true,
   },
   {
+    id: "u10",
+    fullName: "Nargiza Rashidova",
+    role: "psixolog",
+    login: "+998 90 455 12 08",
+    lastSeen: "Bugun, 09:30",
+    active: true,
+  },
+  {
     id: "u9",
     fullName: "Gulnora Saidova",
     role: "tarbiyachi",
@@ -141,7 +150,8 @@ export const users: {
 ];
 
 /** Ruxsatlar matritsasi (PLAN 2-bo'lim). "own" — faqat o'ziga tegishli ma'lumot */
-export type Access = "full" | "own" | "none";
+/** "view" — faqat ko'rish (psixolog) */
+export type Access = "full" | "own" | "view" | "none";
 export const permissions: { section: string; access: Record<Role, Access> }[] = [
   {
     section: "Dashboard va hisobotlar",
@@ -150,6 +160,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
       admin: "none",
       oqituvchi: "none",
       tarbiyachi: "none",
+      psixolog: "none",
       oshpaz: "none",
       otaona: "none",
       oquvchi: "none",
@@ -162,6 +173,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
       admin: "full",
       oqituvchi: "own",
       tarbiyachi: "own",
+      psixolog: "view",
       oshpaz: "none",
       otaona: "own",
       oquvchi: "none",
@@ -174,6 +186,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
       admin: "full",
       oqituvchi: "none",
       tarbiyachi: "none",
+      psixolog: "none",
       oshpaz: "none",
       otaona: "own",
       oquvchi: "none",
@@ -186,6 +199,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
       admin: "full",
       oqituvchi: "own",
       tarbiyachi: "own",
+      psixolog: "none",
       oshpaz: "own",
       otaona: "none",
       oquvchi: "none",
@@ -198,6 +212,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
       admin: "none",
       oqituvchi: "none",
       tarbiyachi: "full",
+      psixolog: "none",
       oshpaz: "none",
       otaona: "own",
       oquvchi: "none",
@@ -210,6 +225,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
       admin: "none",
       oqituvchi: "none",
       tarbiyachi: "none",
+      psixolog: "view",
       oshpaz: "none",
       otaona: "none",
       oquvchi: "none",
@@ -222,6 +238,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
       admin: "none",
       oqituvchi: "none",
       tarbiyachi: "full",
+      psixolog: "view",
       oshpaz: "none",
       otaona: "none",
       oquvchi: "none",
@@ -234,6 +251,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
       admin: "full",
       oqituvchi: "none",
       tarbiyachi: "none",
+      psixolog: "none",
       oshpaz: "full",
       otaona: "own",
       oquvchi: "own",
@@ -246,6 +264,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
       admin: "none",
       oqituvchi: "own",
       tarbiyachi: "none",
+      psixolog: "none",
       oshpaz: "none",
       otaona: "own",
       oquvchi: "own",
@@ -259,6 +278,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
       admin: "none",
       oqituvchi: "own",
       tarbiyachi: "none",
+      psixolog: "view",
       oshpaz: "none",
       otaona: "own",
       oquvchi: "own",
@@ -271,6 +291,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
       admin: "none",
       oqituvchi: "own",
       tarbiyachi: "none",
+      psixolog: "none",
       oshpaz: "none",
       otaona: "own",
       oquvchi: "own",
@@ -283,6 +304,7 @@ export const permissions: { section: string; access: Record<Role, Access> }[] = 
       admin: "none",
       oqituvchi: "none",
       tarbiyachi: "none",
+      psixolog: "none",
       oshpaz: "none",
       otaona: "none",
       oquvchi: "none",

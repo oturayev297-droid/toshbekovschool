@@ -52,7 +52,7 @@ export const uz = {
   },
 
   privacy: {
-    directorTutor: "Faqat direktor va tarbiyachi",
+    directorTutor: "Direktor, tarbiyachi, psixolog",
     directorPsychologist: "Faqat direktor va psixolog",
   },
 

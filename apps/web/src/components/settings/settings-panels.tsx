@@ -1,7 +1,7 @@
 "use client";
 
 import { type ReactNode, useState } from "react";
-import { Bot, Check, KeyRound, Link2, Minus, Plus, ShieldCheck, Users } from "lucide-react";
+import { Bot, Eye, Check, KeyRound, Link2, Minus, Plus, ShieldCheck, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -181,6 +181,11 @@ const accessCell: Record<Access, { label: string; icon: ReactNode; cls: string }
     icon: <ShieldCheck className="size-4" aria-hidden />,
     cls: "text-primary",
   },
+  view: {
+    label: "Faqat ko'rish",
+    icon: <Eye className="size-4" aria-hidden />,
+    cls: "text-accent",
+  },
   none: {
     label: "Yo'q",
     icon: <Minus className="size-4" aria-hidden />,
@@ -193,6 +198,7 @@ const roleBadge: Record<string, "brand" | "accent" | "info" | "default" | "warni
   admin: "accent",
   oqituvchi: "info",
   tarbiyachi: "warning",
+  psixolog: "accent",
   oshpaz: "default",
   otaona: "success",
   oquvchi: "info",

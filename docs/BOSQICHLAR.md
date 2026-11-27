@@ -31,6 +31,14 @@ toshbekovschool/
 6. Har bosqich oxirida `docs/CHANGELOG.md` ga 3–5 qator yoziladi.
 7. Sezgir ma'lumot (bolalar, to'lovlar): hech qachon konsolga/logga chiqarilmaydi; secretlar faqat env'da.
 
+## B2. Har bosqichning umumiy qabul talablari (2-bosqichdan boshlab)
+a) O'sha bosqich bo'limlarida mock qolmaydi: har tugma, forma va filtr haqiqiy API so'rovi bilan ishlaydi.
+b) Har so'rovda yuklanish, xato va bo'sh holat ko'rinadi; xatoda tushunarli o'zbekcha xabar, sahifa qulamaydi.
+c) API'da Zod validatsiya va rol tekshiruvi; har endpoint uchun kamida bitta avtotest.
+d) Chrome'da har bir tugma bosib sinaladi, natija ro'yxati ko'rsatiladi (konsolda xato yo'q).
+e) Namunaviy ma'lumot alohida (`pnpm seed:sample`, `pnpm seed:reset`).
+f) Sinflar, fan narxlari, yotoqxona xonalari Sozlamalardan tahrirlanadi, kodga qotirilmaydi.
+
 ## C. Bosqichlar
 
 ### 0 — Poydevor
@@ -66,7 +74,7 @@ toshbekovschool/
 
 ### 6 — Telegram bot va yotoqxona
 **Ish:** bot, ota-ona bog'lash (bir martalik kod), tarbiyachi smena jadvali, yotoqxona belgilash (uxlash/turish/darsga tushish/uxladi-uxlamadi), 5 soniyalik "Bekor qilish" oynasidan keyin BullMQ (delayed job) orqali ota-onaga xabar (bekor qilinsa hech narsa yuborilmaydi; jurnalda "5 soniya kutilmoqda" holati), qiz va o'g'il bolalar uchun alohida smena va tarbiyachilar (navbatchi + yordamchi), smena vaqti sozlamadan (`config/school.ts`, keyin Sozlamalar), xabar jurnali, qayta urinish (xato bo'lsa).
-**Qabul:** bekor qilish oynasi tugagach 5 soniya ichida xabar boradi (belgilashdan jami ≤ 10 s); bekor qilingan belgi uchun xabar ketmaydi; yuborilmasa jurnalda ko'rinadi va qayta uriniladi.
+**Qabul:** belgilangandan 10 soniya ichida xabar boradi (5 soniyalik bekor qilish oynasi shu vaqtga kiradi); bekor qilingan belgi uchun xabar ketmaydi va jurnalda "bekor qilindi" holati ko'rinadi; yuborilmasa jurnalda ko'rinadi va qayta uriniladi.
 
 ### 7 — Oshxona
 **Ish:** haftalik menyu kiritish (kun × 4 ovqat), arxiv, ota-onalarga yuborish (rejali + qo'lda tugma), ota-ona profilida ko'rinish.
