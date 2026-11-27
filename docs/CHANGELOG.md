@@ -77,3 +77,7 @@ Har bosqich oxirida 3–5 qator qo'shiladi.
 ### Bosqich 1 — darsga tushish qarori (2026-11-27)
 
 - BOSQICHLAR.md: 3-bosqichga davomat moduli (1-dars davomati → «darsga tushish» vaqti avtomatik); 6-bosqichga tungi tarbiyachi vazifalari (uxlash/turish, 07:00 da topshirish, darsga tushish — zaxira sifatida qo'lda) va ertalabgi birlashgan xabar (turdi + darsga tushdi).
+
+### Bosqich 1 — qabul qilindi (2026-11-27)
+
+- Egasi barcha tuzatishlardan keyin 1-bosqichni qabul qildi. `main` ga merge egasining "merge qil" buyrug'i bilan, avval zaxira tag olinadi.
