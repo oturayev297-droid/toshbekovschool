@@ -6,7 +6,16 @@ import { directorNav } from "@/config/nav";
 
 // Vaqtinchalik: Bosqich 1 ning ikkinchi qismida har bo'lim o'z sahifasini oladi.
 // O'z sahifasi tayyor bo'limlar shu ro'yxatdan chiqariladi.
-const built = new Set(["/", "/oquvchilar", "/oqituvchilar", "/xodimlar", "/moliya"]);
+const built = new Set([
+  "/",
+  "/oquvchilar",
+  "/oqituvchilar",
+  "/xodimlar",
+  "/moliya",
+  "/yotoqxona",
+  "/oshxona",
+  "/testlar",
+]);
 const sections = directorNav.filter((n) => !built.has(n.href));
 
 export const dynamicParams = false;

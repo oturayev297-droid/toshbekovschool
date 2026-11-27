@@ -31,3 +31,11 @@ Har bosqich oxirida 3–5 qator qo'shiladi.
 - Moliya: tushum/chiqim grafigi, chiqim tarkibi, qarzdorlar ro'yxati, oylik to'lovlar jadvali (o'quvchi × oy); qarzdorlik raqamlari Dashboard bilan bir xil manbadan.
 - O'qituvchilar va Xodimlar: ro'yxat, fan/lavozim, ish soati/smena, oylik holati, oylik to'lov tarixi.
 - Umumiy: `Form` (Input/Select/SearchInput), `MobileRow`, StatCard container query (tor kartada ikonka tepada), CardHeader tor ekranda o'raladi.
+
+## Bosqich 1 — Dizayn tizimi (3-qism: B guruh, 2026-11-27)
+
+- Yotoqxona: direktor ko'rinishi (bugungi holat, muammolar, Telegram xabarlar jurnali + qayta yuborish) va mobil-birinchi tarbiyachi smenasi (`/yotoqxona/smena`: katta "Uxladi/Uxlamadi" tugmalari, uxlash/turish/darsga vaqtlari, filtr, haftalik smena jadvali).
+- Oshxona: haftalik menyu (kun × nonushta/tushlik/tushki/kechki, bugungi kun belgilanadi), menyu kiritish formasi (kun bo'yicha to'ldirish hisobi), arxiv, "Ota-onalarga yuborish".
+- Testlar: natijalar jadvali (fan filtri), mavzu bo'yicha statistika (bar + jadval, 70 ball chegarasi), o'qituvchi uchun test yaratish (fan → mavzu → sozlamalar → savollar).
+- "Xabar namunalari" (`/xabar-namunalari`, sidebar pastida "Maket"): ota-ona Telegram'da ko'radigan yotoqxona, menyu va test xabarlari chat ko'rinishida.
+- Moliya mock raqamlari bitta manbadan: chiqim = chiqim tarkibi yig'indisi, sof foyda = tushum − chiqim (413 − 290 = 123 mln). `AGENTS.md` (Codex CLI nusxasi) `.gitignore` ga qo'shildi.

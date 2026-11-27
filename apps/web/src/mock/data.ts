@@ -129,7 +129,7 @@ export const dashboard = {
   studentsDelta: "+12 bu oy",
   attendanceToday: 94.2,
   attendanceDelta: "-1,3% kechagidan",
-  revenueMonth: 412_600_000,
+  revenueMonth: 413_000_000,
   revenueDelta: "+8% o'tgan oydan",
   staffTotal: 46,
   teachersTotal: 31,

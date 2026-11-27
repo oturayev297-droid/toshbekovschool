@@ -34,3 +34,15 @@ export function formatUzDate(date: Date): string {
   const p = tashkentParts(date);
   return `${WEEKDAYS[p.weekday]}, ${p.day}-${MONTHS[p.month]} ${p.year}`;
 }
+
+/** Toshkent vaqti bo'yicha "YYYY-MM-DD" */
+export function tashkentISODate(date: Date): string {
+  const p = tashkentParts(date);
+  return `${p.year}-${String(p.month + 1).padStart(2, "0")}-${String(p.day).padStart(2, "0")}`;
+}
+
+/** Toshkent vaqti bo'yicha "HH:MM" */
+export function tashkentTime(date: Date): string {
+  const t = new Date(date.getTime() + TASHKENT_OFFSET_MS);
+  return `${String(t.getUTCHours()).padStart(2, "0")}:${String(t.getUTCMinutes()).padStart(2, "0")}`;
+}

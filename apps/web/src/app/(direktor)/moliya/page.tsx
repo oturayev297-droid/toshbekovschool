@@ -83,7 +83,6 @@ const scheduleColumns: Column<Row>[] = [
 
 export default function FinancePage() {
   const collectedPct = Math.round((f.revenue / f.expected) * 100);
-  const totalExpense = expenseBreakdown.reduce((a, e) => a + e.amount, 0);
 
   return (
     <>
@@ -119,7 +118,7 @@ export default function FinancePage() {
         />
         <StatCard
           label="Sof foyda"
-          value={formatMln(f.revenue - f.expenses)}
+          value={formatMln(f.profit)}
           hint="Tushum − chiqim"
           icon={Banknote}
         />
@@ -155,7 +154,7 @@ export default function FinancePage() {
               <CardContent>
                 <ul className="space-y-4">
                   {expenseBreakdown.map((e) => {
-                    const pct = Math.round((e.amount / totalExpense) * 100);
+                    const pct = Math.round((e.amount / f.expenses) * 100);
                     return (
                       <li key={e.id}>
                         <div className="flex justify-between gap-3 text-sm">

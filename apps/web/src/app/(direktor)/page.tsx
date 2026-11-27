@@ -20,9 +20,8 @@ import { type Column, DataTable } from "@/components/ui/data-table";
 import { StatCard } from "@/components/ui/stat-card";
 import { StudentMobileRow } from "@/components/students/student-mobile-row";
 import { formatMln, formatSom, initials } from "@/lib/format";
-import { paymentBadge } from "@/lib/status";
+import { alertBadge, paymentBadge } from "@/lib/status";
 import {
-  type AlertLevel,
   aiAlerts,
   attendanceWeek,
   dashboard,
@@ -35,12 +34,6 @@ import {
 import { debtTotals } from "@/mock/people";
 
 export const metadata = { title: "Bosh sahifa" };
-
-const alertBadge: Record<AlertLevel, { label: string; variant: "danger" | "warning" | "info" }> = {
-  yuqori: { label: "Muhim", variant: "danger" },
-  orta: { label: "E'tibor", variant: "warning" },
-  past: { label: "Ma'lumot", variant: "info" },
-};
 
 const studentColumns: Column<Student>[] = [
   {

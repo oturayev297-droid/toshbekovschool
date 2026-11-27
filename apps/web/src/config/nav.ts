@@ -6,6 +6,7 @@ import {
   FileBarChart,
   GraduationCap,
   LayoutDashboard,
+  MessageSquareText,
   type LucideIcon,
   Moon,
   Settings,
@@ -28,4 +29,9 @@ export const directorNav: NavItem[] = [
   { label: "AI Markaz", href: "/ai-markaz", icon: Bot },
   { label: "AI Xodim hisobotlari", href: "/ai-xodim", icon: FileBarChart },
   { label: "Sozlamalar", href: "/sozlamalar", icon: Settings },
+];
+
+// Faqat dizayn bosqichi uchun sahifalar (PLAN tartibiga kirmaydi, sidebar pastida alohida)
+export const designNav: NavItem[] = [
+  { label: "Xabar namunalari", href: "/xabar-namunalari", icon: MessageSquareText },
 ];

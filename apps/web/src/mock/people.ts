@@ -151,7 +151,7 @@ export const staff: StaffMember[] = [
     fullName: "Malika Sobirova",
     position: "Tarbiyachi",
     department: "Yotoqxona",
-    shift: "Kechki smena",
+    shift: "Tungi, jadval bo'yicha",
     salary: 5_200_000,
     salaryStatus: "kutilmoqda",
     phone: "+998 97 533 20 48",
@@ -161,7 +161,7 @@ export const staff: StaffMember[] = [
     fullName: "Feruza Aliyeva",
     position: "Tarbiyachi",
     department: "Yotoqxona",
-    shift: "Tungi smena",
+    shift: "Tungi, jadval bo'yicha",
     salary: 5_400_000,
     salaryStatus: "tolandi",
     phone: "+998 99 610 72 15",
@@ -207,21 +207,28 @@ export const staff: StaffMember[] = [
 
 // --- Moliya ---
 
-export const financeSummary = {
-  month: "Noyabr 2026",
-  revenue: 412_600_000,
-  expected: 451_000_000,
-  expenses: 290_300_000,
-  salaryFund: 236_000_000,
-};
-
 export const expenseBreakdown = [
   { id: "e1", category: "O'qituvchilar oyligi", amount: 165_800_000 },
   { id: "e2", category: "Xodimlar oyligi", amount: 70_200_000 },
   { id: "e3", category: "Oshxona mahsulotlari", amount: 31_400_000 },
   { id: "e4", category: "Kommunal xizmatlar", amount: 12_600_000 },
-  { id: "e5", category: "Xo'jalik va ta'mirlash", amount: 10_300_000 },
+  { id: "e5", category: "Xo'jalik va ta'mirlash", amount: 10_000_000 },
 ];
+
+/**
+ * Oylik moliya xulosasi. Chiqim va oylik fondi chiqim tarkibidan hisoblanadi,
+ * sof foyda = tushum − chiqim — kartalardagi raqamlar bir-biriga aniq mos keladi
+ * (413 − 290 = 123 mln).
+ */
+const expensesTotal = expenseBreakdown.reduce((a, e) => a + e.amount, 0);
+export const financeSummary = {
+  month: "Noyabr 2026",
+  revenue: 413_000_000,
+  expected: 451_000_000,
+  expenses: expensesTotal,
+  salaryFund: expenseBreakdown[0].amount + expenseBreakdown[1].amount,
+  profit: 413_000_000 - expensesTotal,
+};
 
 /** Qarzdorlar — o'quvchilar ro'yxatidan hisoblanadi */
 export const debtors = students

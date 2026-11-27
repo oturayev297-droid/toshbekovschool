@@ -113,6 +113,6 @@ Men tasdiqlagach qolgan sahifalarni davom ettir.
 | Bosqich | Branch | Holat |
 | --- | --- | --- |
 | 0 — Poydevor | `bosqich-0-poydevor` | qabul qilindi (deploy keyinroq) |
-| 1 — Dizayn tizimi | `bosqich-1-dizayn` | jarayonda (1-qism tasdiqlandi; 2-qism A guruh: O'quvchilar, Moliya, O'qituvchilar, Xodimlar — ko'rib chiqishda; B guruh kutilmoqda) |
+| 1 — Dizayn tizimi | `bosqich-1-dizayn` | jarayonda (1-qism va A guruh tasdiqlandi; B guruh: Yotoqxona, Oshxona, Testlar, Xabar namunalari — ko'rib chiqishda; C guruh kutilmoqda) |
 | 2 — DB va API asosi | — | kutilmoqda |
 | 3–13 | — | kutilmoqda |
